@@ -1,0 +1,5 @@
+C:\Users\Gigi\Downloads\Pikod Haoerf\PikodAorfLayout.exe
+C:\Users\Gigi\Downloads\Pikod Haoerf\PikodAorfLayout.dll
+C:\Users\Gigi\Downloads\Pikod Haoerf\PikodAorfLayout.deps.json
+C:\Users\Gigi\Downloads\Pikod Haoerf\PikodAorfLayout.runtimeconfig.json
+C:\Users\Gigi\Downloads\Pikod Haoerf\PikodAorfLayout.pdb
