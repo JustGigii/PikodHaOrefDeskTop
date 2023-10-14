@@ -65,7 +65,7 @@ namespace PikodAorfLayout
                     });
                 }
 
-                Thread.Sleep(100);
+                Thread.Sleep(TimeSpan.FromSeconds(5));
             }
         }
         public async Task Popdata()
@@ -85,7 +85,7 @@ namespace PikodAorfLayout
                 for (int i = 0; i < loop; i++)
                 {
                     await this.Dispatcher.Invoke(async () => { messages.Children.Clear(); });
-                    data = await LoadJsonAsync();
+                    if(i > 0) data = await LoadJsonAsync();
                     releventData = Filter(data);
                     releventData.Sort();
                     foreach (var item in releventData)
@@ -116,7 +116,7 @@ namespace PikodAorfLayout
             List<Alert> releventData = new List<Alert>();
             if (data == null) return releventData;
             foreach (var alert in data)
-            { 
+            {
                 if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
                 {
                     releventData.Add(alert);
@@ -143,28 +143,25 @@ namespace PikodAorfLayout
         }
         private async Task<Alert[]> LoadJsonAsync()
         {
-            using (HttpClient httpClient = new HttpClient())
+            HttpClient httpClient = new HttpClient();
+            // URL of the JSON data
+            string url = "https://www.oref.org.il/WarningMessages/History/AlertsHistory.json";
+            try
             {
-                // URL of the JSON data
-                string url = "https://www.oref.org.il/WarningMessages/History/AlertsHistory.json";
+                // Fetching the data
+                string response = await httpClient.GetStringAsync(url);
 
-                try
-                {
-                    // Fetching the data
-                    string response = await httpClient.GetStringAsync(url);
-
-                    // If your JSON represents an object, you can define a class and deserialize to it.
-                    // Here I'm using dynamic for simplicity, but in a real-world scenario, it's better to deserialize to a specific class.
-                    Alert[] data = JsonSerializer.Deserialize<Alert[]>(response);
-                    return data;
-                }
-                catch (Exception ex)
-                {
-                    // Handle exceptions
-                    MessageBox.Show("Error fetching data: " + ex.Message);
-                }
-                return null;
+                // If your JSON represents an object, you can define a class and deserialize to it.
+                // Here I'm using dynamic for simplicity, but in a real-world scenario, it's better to deserialize to a specific class.
+                Alert[] data = JsonSerializer.Deserialize<Alert[]>(response);
+                return data;
             }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+               // MessageBox.Show("Error fetching data: " + ex.Message);
+            }
+            return null;
         }
     }
 }
