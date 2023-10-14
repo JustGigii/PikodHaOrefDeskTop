@@ -114,8 +114,9 @@ namespace PikodAorfLayout
         private List<Alert> Filter(Alert[] data)
         {
             List<Alert> releventData = new List<Alert>();
+            if (data == null) return releventData;
             foreach (var alert in data)
-            {
+            { 
                 if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
                 {
                     releventData.Add(alert);
