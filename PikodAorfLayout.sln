@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PikodAorfLayout", "PikodAorfLayout.csproj", "{3F94CFBE-0B72-47C4-8CE8-601F66E5FEDD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F94CFBE-0B72-47C4-8CE8-601F66E5FEDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F94CFBE-0B72-47C4-8CE8-601F66E5FEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F94CFBE-0B72-47C4-8CE8-601F66E5FEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F94CFBE-0B72-47C4-8CE8-601F66E5FEDD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FAC621D8-B082-4F02-9B63-00922DE9B56C}
+	EndGlobalSection
+EndGlobal

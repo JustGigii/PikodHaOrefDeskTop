@@ -22,6 +22,7 @@ using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Windows.Forms;
 
 
 namespace PikodAorfLayout
@@ -40,19 +41,17 @@ namespace PikodAorfLayout
             Height = System.Windows.SystemParameters.WorkArea.Height;
             Topmost = true;
             System.Threading.Thread thread = new System.Threading.Thread(cheakjson);
-            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            string str = Assembly.GetExecutingAssembly().Location;
-            key.SetValue("Camaleone", str);
             thread.Start();
 
         }
+
         private async void cheakjson()
         {
             startTime = DateTime.Now;
             await Popdata();
             while (true)
             {
-                if (DateTime.Now - startTime > TimeSpan.FromMinutes(1))
+                if (DateTime.Now - startTime > TimeSpan.FromSeconds(15))
                 {
                     await Popdata();
                 }

@@ -1,0 +1,12 @@
+D:\עבודה\PikodHaOrefDeskTop\Build\icon.ico
+D:\עבודה\PikodHaOrefDeskTop\Build\image\exit.png
+D:\עבודה\PikodHaOrefDeskTop\Build\image\Settings.png
+D:\עבודה\PikodHaOrefDeskTop\Build\PikodAorfLayout.exe
+D:\עבודה\PikodHaOrefDeskTop\Build\PikodAorfLayout.dll
+D:\עבודה\PikodHaOrefDeskTop\Build\PikodAorfLayout.deps.json
+D:\עבודה\PikodHaOrefDeskTop\Build\PikodAorfLayout.runtimeconfig.json
+D:\עבודה\PikodHaOrefDeskTop\Build\PikodAorfLayout.pdb
+D:\עבודה\PikodHaOrefDeskTop\Build\Microsoft.Win32.SystemEvents.dll
+D:\עבודה\PikodHaOrefDeskTop\Build\System.Drawing.Common.dll
+D:\עבודה\PikodHaOrefDeskTop\Build\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\עבודה\PikodHaOrefDeskTop\Build\runtimes\win\lib\net6.0\System.Drawing.Common.dll
