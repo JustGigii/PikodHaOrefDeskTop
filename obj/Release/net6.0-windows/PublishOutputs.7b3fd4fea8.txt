@@ -1,5 +1,12 @@
 C:\Users\omrig\Downloads\pikod\icon.ico
+C:\Users\omrig\Downloads\pikod\AssemblyInfo.cs
+C:\Users\omrig\Downloads\pikod\config.json
+C:\Users\omrig\Downloads\pikod\data\areas_data.json
+C:\Users\omrig\Downloads\pikod\data\districts.json
+C:\Users\omrig\Downloads\pikod\image\addicon.png
+C:\Users\omrig\Downloads\pikod\image\alert.png
 C:\Users\omrig\Downloads\pikod\image\exit.png
+C:\Users\omrig\Downloads\pikod\image\logo.png
 C:\Users\omrig\Downloads\pikod\image\Settings.png
 C:\Users\omrig\Downloads\pikod\PikodAorfLayout.exe
 C:\Users\omrig\Downloads\pikod\PikodAorfLayout.dll
@@ -7,6 +14,7 @@ C:\Users\omrig\Downloads\pikod\PikodAorfLayout.deps.json
 C:\Users\omrig\Downloads\pikod\PikodAorfLayout.runtimeconfig.json
 C:\Users\omrig\Downloads\pikod\PikodAorfLayout.pdb
 C:\Users\omrig\Downloads\pikod\Microsoft.Win32.SystemEvents.dll
+C:\Users\omrig\Downloads\pikod\Newtonsoft.Json.dll
 C:\Users\omrig\Downloads\pikod\System.Drawing.Common.dll
 C:\Users\omrig\Downloads\pikod\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\omrig\Downloads\pikod\runtimes\win\lib\net6.0\System.Drawing.Common.dll

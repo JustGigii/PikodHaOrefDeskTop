@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "7DxjLt5kXWmugaHwy5685Aj2NlmExpQM4NJu2s/JpD6FS6yWCHg15SdXlbbyGLtmKMWAQjqhKltvjslYGGtPdQ==",
+  "dgSpecHash": "JiKJMI+MHR94RYdn95o0YfPoy4oqohnb9hruJ04XqyRlxjYEpqMWhv05KUK/YnaKlRGb57r8ulkKtZldE1wGLw==",
   "success": true,
   "projectFilePath": "D:\\עבודה\\PikodHaOrefDeskTop\\PikodAorfLayout.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\omrig\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\omrig\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\omrig\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512"
   ],
   "logs": []

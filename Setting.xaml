@@ -5,12 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PikodAorfLayout"
         mc:Ignorable="d"
-        Height="600" Width="920"  WindowStyle="None" Background="Transparent" ResizeMode="NoResize" ShowInTaskbar="True" Visibility="Visible" MouseDown="Window_MouseDown">
+        Height="600" Width="920"  WindowStyle="None" Background="Transparent" ResizeMode="NoResize" ShowInTaskbar="True" Visibility="Visible" MouseDown="Window_MouseDown" AllowsTransparency="True">
     <Window.Resources >
-        <ResourceDictionary Source="scroll.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="scroll.xaml">
+
+        </ResourceDictionary>
+
     </Window.Resources>
 
-    <Border Background="#CCF5DE9C" CornerRadius="20">
+
+    <Border Background="#FFF5DE9C" CornerRadius="20">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -26,34 +30,76 @@
             <StackPanel Grid.Row="1"/>
             <Image HorizontalAlignment="Left" Height="75"  Margin="52,0,0,0" Grid.Column="0" VerticalAlignment="Top" Width="100" Source="/logo.png" />
             <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="24" Foreground="White" FontFamily="heebo"  Grid.Column="0" Grid.Row="1" Width="200" TextAlignment="Center"> :רשימת מעקב</TextBlock>
+            <ScrollViewer Grid.Column="0" Grid.Row="1" Margin="0 40 0 0" FlowDirection="RightToLeft">
+                <Grid Width="190">
+                    <ItemsControl x:Name="choose" Margin="0 0 0 0"  ItemsSource="{Binding}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="18" Foreground="White" FontFamily="heebo" Width="200" TextAlignment="Left"  Text="{Binding}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </Grid>
+            </ScrollViewer>
             <Viewbox Grid.Row="1"  Grid.Column="1" Margin="445,25,20,460" Height="40">
-                <RadioButton Grid.Column="1"  Content="להציג את כל  הישובים" FlowDirection="RightToLeft"  Foreground="White"/>
+                <RadioButton x:Name="allcheak" GroupName="ChoiseAlarm" Grid.Column="1"  Content="להציג את כל  הישובים" FlowDirection="RightToLeft"  Foreground="White" Checked="RadioButton_Checked"/>
             </Viewbox>
             <Viewbox Grid.Row="1"  Grid.Column="1" Margin="518,84,20,411">
-                <RadioButton Grid.Column="1"  Content="הצג לפי אזורים" FlowDirection="RightToLeft"  Foreground="White"/>
+                <RadioButton  x:Name="DistrictsCheck"  GroupName="ChoiseAlarm" Grid.Column="1"  Content="הצג לפי אזורים" FlowDirection="RightToLeft"  Foreground="White" Checked="RadioButton_Checked"/>
             </Viewbox>
-            <Border Grid.Row="1"  Grid.Column="1" CornerRadius="10" Background="#FFFFAB45" Margin="223,99,249,212" >
-                <ScrollViewer Margin="0,0,1,0" Height="214" VerticalAlignment="Bottom" FlowDirection="RightToLeft">
-                    <StackPanel  Width="237">
-                        <Grid  Margin="0 10 0 10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Margin="5 0 0 0" Grid.Column="1" Source="/addicon.png" Width="25" Height="25"  />
-                            <TextBlock Grid.Column="0" FontFamily="heebo"  Foreground="White"  Text="אזור התעשיה באר שבע" FontSize="17" TextAlignment="Left" Margin="6 0 0 0" ></TextBlock>
-                        </Grid>
-                        
-
-
+            <Border  Grid.Row="1"  Grid.Column="1" CornerRadius="10" BorderBrush="#FFE88813" BorderThickness="4,4,4,4" Background="#FFFFAB45" Margin="223,99,249,212" >
+                <ScrollViewer x:Name="DistrictsPanel"  Margin="0,6,1,0" Height="200" VerticalAlignment="Top" FlowDirection="RightToLeft">
+                    <StackPanel Width="229">
+                        <ItemsControl x:Name="districtscontrolchoose" Margin="0 0 0 0" ItemsSource="{Binding}" Width="237">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDownDelete" MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions >
+                                        <Image Margin="0 0 0 0" Grid.Column="1" Source="/deleticon.png" Width="25" Height="25"   />
+                                        <TextBlock Grid.Column="0" FontFamily="heebo"  Foreground="Black"  Text="{Binding name}" FontSize="17" TextAlignment="Left" Margin="6 0 0 0" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl x:Name="districtscontrol" Margin="0 0 10 0" ItemsSource="{Binding}" Width="237">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDownAdd" MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions >
+                                        <Image Margin="0 0 0 0" Grid.Column="1" Source="/addicon.png" Width="25" Height="25"   />
+                                        <TextBlock Grid.Column="0" FontFamily="heebo"  Foreground="White"  Text="{Binding name}" FontSize="17" TextAlignment="Left" Margin="6 0 0 0" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
                 </ScrollViewer>
-                
+
             </Border>
-            
+            <Button  BorderThickness="2" Grid.Column="1" Content="שמירה" HorizontalAlignment="Left" Margin="81,442,0,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFFFAB45" Height="37" Width="75" Foreground="White" BorderBrush="#FFE88813" Click="Button_Click"/>
+
 
         </Grid>
 
     </Border>
 
 </Window>
+<!--<ItemsControl  x:Name="districtslist" ItemsSource="{Binding Items}">
+    <StackPanel  Width="237">
+        <Grid  Margin="0 10 0 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Image Margin="5 0 0 0" Grid.Column="1" Source="/addicon.png" Width="25" Height="25"  />
+            <TextBlock Grid.Column="0" FontFamily="heebo"  Foreground="White"  Text="{Binding name}" FontSize="17" TextAlignment="Left" Margin="6 0 0 0" ></TextBlock>
+        </Grid>
+    </StackPanel>
+</ItemsControl>-->

@@ -1,13 +1,16 @@
-﻿using System;
+﻿using PikodAorfLayout.Class;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Shapes;
 using Forms = System.Windows.Forms;
 
 namespace PikodAorfLayout
@@ -16,7 +19,9 @@ namespace PikodAorfLayout
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    {
+    {   
+        public static string JsonPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref", "config.json");
+       
         private readonly Forms.NotifyIcon _notifyIcon;
         public App()
         {
@@ -26,6 +31,13 @@ namespace PikodAorfLayout
         {
             AddTostartUp();
             InitializeNotifyIcon();
+            if (!File.Exists(JsonPath))
+            {         
+            if (!Directory.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref")))
+                Directory.CreateDirectory(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref"));
+            string newtext = "{\"ChoiseAlarm\":\"allcheak\",\"choise\":{}}";
+            File.WriteAllText(JsonPath, newtext);
+            }
             base.OnStartup(e);
         }
         protected override void OnExit(ExitEventArgs e)

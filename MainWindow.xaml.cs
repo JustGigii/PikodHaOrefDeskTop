@@ -42,6 +42,7 @@ namespace PikodAorfLayout
             Topmost = true;
             System.Threading.Thread thread = new System.Threading.Thread(cheakjson);
             thread.Start();
+            var a = Choise.choiselist;
 
         }
 
@@ -116,6 +117,7 @@ namespace PikodAorfLayout
             if (data == null) return releventData;
             foreach (var alert in data)
             {
+               // if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(5))
                 if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
                 {
                     releventData.Add(alert);
@@ -135,7 +137,7 @@ namespace PikodAorfLayout
             newblock.FontFamily = new FontFamily("Hobo Std");
             newblock.Width = 500;
             newblock.Text = text + "  ";
-            newblock.Margin = new Thickness(0, 0, 0, 8);
+            newblock.Margin = new Thickness(0, 0, 0, 3);
             newblock.TextAlignment = TextAlignment.Right;
             newblock.FontSize = 36;
             return newblock;

@@ -55,3 +55,12 @@ D:\עבודה\PikodHaOrefDeskTop\obj\Release\net6.0-windows\PikodAorfLayout.cspr
 D:\עבודה\PikodHaOrefDeskTop\obj\Release\net6.0-windows\Setting.g.cs
 D:\עבודה\PikodHaOrefDeskTop\obj\Release\net6.0-windows\Setting.baml
 D:\עבודה\PikodHaOrefDeskTop\obj\Release\net6.0-windows\PikodAorfLayout.csproj.CopyComplete
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\AssemblyInfo.cs
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\config.json
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\data\areas_data.json
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\data\districts.json
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\image\addicon.png
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\image\alert.png
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\image\logo.png
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\Newtonsoft.Json.dll
+D:\עבודה\PikodHaOrefDeskTop\obj\Release\net6.0-windows\scroll.baml

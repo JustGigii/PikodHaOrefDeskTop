@@ -57,3 +57,11 @@ D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\image\Settings.png
 D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\image\exit.png
 D:\עבודה\PikodHaOrefDeskTop\obj\Debug\net6.0-windows\scroll.baml
 D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\image\addicon.png
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\data\districts.json
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\data\areas_data.json
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\AssemblyInfo.cs
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\config.json
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\image\logo.png
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\image\alert.png
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\image\deleticon.png
