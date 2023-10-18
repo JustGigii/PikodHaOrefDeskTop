@@ -8,6 +8,7 @@ namespace PikodAorfLayout.Class
 {
     class Config
     {
+        public static Config config;
         public string ChoiseAlarm { get; set; }
         public Choise choise { get; set; }
     }

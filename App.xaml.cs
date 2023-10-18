@@ -1,4 +1,5 @@
-﻿using PikodAorfLayout.Class;
+﻿using Newtonsoft.Json;
+using PikodAorfLayout.Class;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -31,6 +32,7 @@ namespace PikodAorfLayout
         {
             AddTostartUp();
             InitializeNotifyIcon();
+            loadstartupjson();
             if (!File.Exists(JsonPath))
             {         
             if (!Directory.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref")))
@@ -60,6 +62,13 @@ namespace PikodAorfLayout
             _notifyIcon.ContextMenuStrip = new Forms.ContextMenuStrip();
             _notifyIcon.ContextMenuStrip.Items.Add("Setting",Image.FromFile("image/Settings.png"), _notifyIcon_Click);
             _notifyIcon.ContextMenuStrip.Items.Add("exit", Image.FromFile("image/exit.png"), _notifyIcon_Exit);
+        }
+        private void loadstartupjson()
+        {
+            string jsonData = File.ReadAllText(App.JsonPath);
+            Config.config = JsonConvert.DeserializeObject<Config>(jsonData);
+            
+
         }
 
         private void _notifyIcon_Exit(object? sender, EventArgs e)

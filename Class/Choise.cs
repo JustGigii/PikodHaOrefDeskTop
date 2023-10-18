@@ -20,6 +20,7 @@ namespace PikodAorfLayout.Class
         }
         public void AddChoise(String item) 
         {
+           
             if (!_items.Contains(item)) { _items.Add(item); _items.Sort(); }
         }
         public void RemoveChoise(String item)

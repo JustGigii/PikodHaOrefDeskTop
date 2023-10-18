@@ -117,10 +117,18 @@ namespace PikodAorfLayout
             if (data == null) return releventData;
             foreach (var alert in data)
             {
-               // if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(5))
+                //if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(24) )
                 if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
                 {
+                    if (Choise.choiselist.Items.Count > 0)
+                    { 
+                    if (Choise.choiselist.Items.Contains(alert.data))
                     releventData.Add(alert);
+                    }
+                    else
+                    {
+                        releventData.Add(alert);
+                    }
                 }
             }
 

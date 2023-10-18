@@ -19,7 +19,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace PikodAorfLayout
 {
     /// <summary>
@@ -29,6 +28,7 @@ namespace PikodAorfLayout
     {
         private List<Districts> districts;
         private List<Districts> choosedistricts;
+        private Choise allcity;
         private Choise choiselist;
         private Config config;
         private bool onload;
@@ -37,34 +37,39 @@ namespace PikodAorfLayout
             onload = false;
             choiselist =   Choise.choiselist;
             choosedistricts = new List<Districts>();
+            allcity = new Choise();
             InitializeComponent();
             loadDistrictjson();
-            loadstartupjson();
-
-
+            loadautocomplte();
+            
+            config = Config.config;
+            selectionradio(Config.config.ChoiseAlarm, false);
         }
         private void loadDistrictjson()
         {
             string jsonData = File.ReadAllText("data/areas_data.json");
             districts = JsonConvert.DeserializeObject<List<Districts>>(jsonData);
         }
-        private void loadstartupjson()
+
+        void loadautocomplte()
         {
-            string jsonData = File.ReadAllText(App.JsonPath);
-            config = JsonConvert.DeserializeObject<Config>(jsonData);
-            selectionradio(config.ChoiseAlarm, false);
-
+            foreach (var district in districts)
+            {
+                foreach(var choise in district.cities)
+                {
+                    allcity.AddChoise(choise);
+                }
+            }
         }
-
         private void selectionradio(string ChoiseAlarm, bool isfirst)
         {
             switch (ChoiseAlarm)
             {
                 case "allcheak":
-                    config.ChoiseAlarm = "allcheak";
+                    Config.config.ChoiseAlarm = "allcheak";
                     allcheak.IsChecked = true;
                     DistrictsPanel.Visibility = Visibility.Hidden;
-                    config.choise.Clear();
+                    clearlist();
                     break;
                 case "DistrictsCheck":
                     config.ChoiseAlarm = "DistrictsCheck";
@@ -87,12 +92,20 @@ namespace PikodAorfLayout
                             districts.Remove(distcirct);
                         }
                     }
-                    popDistricts();
                     DistrictsPanel.Visibility = Visibility.Visible;
 
                     break;
             }
+            popDistricts();
             onload = true;
+        }
+
+        private void clearlist()
+        {
+            config.choise.Clear();
+            choiselist.Clear();
+            choosedistricts.Clear();
+            loadDistrictjson();
         }
 
         void popDistricts()
@@ -170,5 +183,127 @@ namespace PikodAorfLayout
 
             }
         }
+        private void OpenAutoSuggestionBox()
+        {
+            try
+            {
+                // Enable.  
+                this.autoListPopup.Visibility = Visibility.Visible;
+                this.autoListPopup.IsOpen = true;
+                this.autoList.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                // Info.  
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.Write(ex);
+            }
+        }
+
+
+
+        #region Close Auto Suggestion box method  
+
+        /// <summary>  
+        ///  Close Auto Suggestion box method  
+        /// </summary>  
+        private void CloseAutoSuggestionBox()
+        {
+            try
+            {
+                // Enable.  
+                this.autoListPopup.Visibility = Visibility.Collapsed;
+                this.autoListPopup.IsOpen = false;
+                this.autoList.Visibility = Visibility.Collapsed;
+            }
+            catch (Exception ex)
+            {
+                // Info.  
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.Write(ex);
+            }
+        }
+
+        #endregion
+
+        #region Auto Text Box text changed the method  
+
+        /// <summary>  
+        ///  Auto Text Box text changed method.  
+        /// </summary>  
+        /// <param name="sender">Sender parameter</param>  
+        /// <param name="e">Event parameter</param>  
+        private void AutoTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+            
+                // Verification.  
+                if (string.IsNullOrEmpty(this.autoTextBox.Text))
+                {
+                    // Disable.  
+                    this.CloseAutoSuggestionBox();
+
+                    // Info.  
+                    return;
+                }
+
+                // Settings.  
+                this.autoList.ItemsSource = this.allcity.Items.Where(p => p.Contains(this.autoTextBox.Text)).ToList();
+                // Enable.  
+                this.OpenAutoSuggestionBox();
+
+            }
+            catch (Exception ex)
+            {
+                // Info.  
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.Write(ex);
+            }
+        }
+
+        #endregion
+
+        #region Auto list selection changed method  
+
+        /// <summary>  
+        ///  Auto list selection changed method.  
+        /// </summary>  
+        /// <param name="sender">Sender parameter</param>  
+        /// <param name="e">Event parameter</param>  
+        private void AutoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                // Verification.  
+                if (this.autoList.SelectedIndex <= -1)
+                {
+                    // Disable.  
+                    this.CloseAutoSuggestionBox();
+
+                    // Info.  
+                    return;
+                }
+
+                // Disable.  
+                this.CloseAutoSuggestionBox();
+
+                // Settings.  
+                this.autoTextBox.Text = this.autoList.SelectedItem.ToString();
+                if (!choiselist.Items.Contains(this.autoList.SelectedItem.ToString()))
+                choiselist.AddChoise(this.autoList.SelectedItem.ToString());
+                choose.DataContext = new ObservableCollection<string>(choiselist.Items);
+                this.autoList.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                // Info.  
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.Write(ex);
+            }
+        }
+
+        #endregion
     }
+
 }

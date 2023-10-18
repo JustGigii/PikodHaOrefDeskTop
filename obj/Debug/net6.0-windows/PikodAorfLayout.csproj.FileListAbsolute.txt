@@ -65,3 +65,8 @@ D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\config.json
 D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\image\logo.png
 D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\image\alert.png
 D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\image\deleticon.png
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\DotNetProjects.Input.Toolkit.dll
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\ControlzEx.dll
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\MahApps.Metro.dll
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\Microsoft.Xaml.Behaviors.dll
+D:\עבודה\PikodHaOrefDeskTop\bin\Debug\net6.0-windows\de\MahApps.Metro.resources.dll

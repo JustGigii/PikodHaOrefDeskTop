@@ -8,11 +8,49 @@
     ".NETCoreApp,Version=v6.0": {
       "PikodAorfLayout/1.0.0": {
         "dependencies": {
+          "DotNetProjects.WpfToolkit.Input": "6.1.94",
+          "MahApps.Metro": "2.4.10",
           "Newtonsoft.Json": "13.0.3",
           "System.Drawing.Common": "7.0.0"
         },
         "runtime": {
           "PikodAorfLayout.dll": {}
+        }
+      },
+      "ControlzEx/4.4.0": {
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.19",
+          "System.Text.Json": "4.7.2"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/ControlzEx.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.4.0.50"
+          }
+        }
+      },
+      "DotNetProjects.WpfToolkit.Input/6.1.94": {
+        "runtime": {
+          "lib/net6.0-windows7.0/DotNetProjects.Input.Toolkit.dll": {
+            "assemblyVersion": "6.1.94.0",
+            "fileVersion": "6.1.94.0"
+          }
+        }
+      },
+      "MahApps.Metro/2.4.10": {
+        "dependencies": {
+          "ControlzEx": "4.4.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/MahApps.Metro.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.4.10.1"
+          }
+        },
+        "resources": {
+          "lib/netcoreapp3.1/de/MahApps.Metro.resources.dll": {
+            "locale": "de"
+          }
         }
       },
       "Microsoft.Win32.SystemEvents/7.0.0": {
@@ -28,6 +66,14 @@
             "assetType": "runtime",
             "assemblyVersion": "7.0.0.0",
             "fileVersion": "7.0.22.51805"
+          }
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+        "runtime": {
+          "lib/netcoreapp3.0/Microsoft.Xaml.Behaviors.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.19.35512"
           }
         }
       },
@@ -57,7 +103,8 @@
             "fileVersion": "7.0.22.51805"
           }
         }
-      }
+      },
+      "System.Text.Json/4.7.2": {}
     }
   },
   "libraries": {
@@ -66,12 +113,40 @@
       "serviceable": false,
       "sha512": ""
     },
+    "ControlzEx/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pZ5z4hYWwE4R13UMCVs6vII//nL7hz+Nwn4oJlnsZJRGqJNy6Z9KnJiTZfly6lKFu0pMc1aWBZpx+VqFTQKP1Q==",
+      "path": "controlzex/4.4.0",
+      "hashPath": "controlzex.4.4.0.nupkg.sha512"
+    },
+    "DotNetProjects.WpfToolkit.Input/6.1.94": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0YcVgMwcytYzhGeIlOTs/5cmbobEa5AdL3vGONiqcScDTXwn5HL7tzIiHAsnPXuy9h+rOFtxuvod2jiRXC6tgQ==",
+      "path": "dotnetprojects.wpftoolkit.input/6.1.94",
+      "hashPath": "dotnetprojects.wpftoolkit.input.6.1.94.nupkg.sha512"
+    },
+    "MahApps.Metro/2.4.10": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-45exHKJCVYaD1/rNr3ekZPECEBM4uHOt6aYp6yNaJbliFMUo+d3z8Gi1xG+qEkbiHKITX+dlz+BW1FOsjAbl/w==",
+      "path": "mahapps.metro/2.4.10",
+      "hashPath": "mahapps.metro.2.4.10.nupkg.sha512"
+    },
     "Microsoft.Win32.SystemEvents/7.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-2nXPrhdAyAzir0gLl8Yy8S5Mnm/uBSQQA7jEsILOS1MTyS7DbmV1NgViMtvV1sfCD1ebITpNwb1NIinKeJgUVQ==",
       "path": "microsoft.win32.systemevents/7.0.0",
       "hashPath": "microsoft.win32.systemevents.7.0.0.nupkg.sha512"
+    },
+    "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5sPWkbqImc2t1aQwIfJcKsUo7tOg1Tr8+6xVzZJB56Nzt4u9NlpcLofgdX/aRYpPKdWDA3U23Akw1KQzU5e82g==",
+      "path": "microsoft.xaml.behaviors.wpf/1.1.19",
+      "hashPath": "microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",
@@ -86,6 +161,13 @@
       "sha512": "sha512-KIX+oBU38pxkKPxvLcLfIkOV5Ien8ReN78wro7OF5/erwcmortzeFx+iBswlh2Vz6gVne0khocQudGwaO1Ey6A==",
       "path": "system.drawing.common/7.0.0",
       "hashPath": "system.drawing.common.7.0.0.nupkg.sha512"
+    },
+    "System.Text.Json/4.7.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TcMd95wcrubm9nHvJEQs70rC0H/8omiSGGpU4FQ/ZA1URIqD4pjmFJh2Mfv1yH1eHgJDWTi2hMDXwTET+zOOyg==",
+      "path": "system.text.json/4.7.2",
+      "hashPath": "system.text.json.4.7.2.nupkg.sha512"
     }
   }
 }
