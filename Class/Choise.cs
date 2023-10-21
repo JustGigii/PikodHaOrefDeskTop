@@ -14,6 +14,10 @@ namespace PikodAorfLayout.Class
         {
             _items = new List<String>();
         }
+        public Choise( Choise Other)
+        {
+            _items = new List<string>(Other._items);
+        }
         public List<String> Items
         {
             get { return _items; }

@@ -373,24 +373,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\omrig\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Gigi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\עבודה\\PikodHaOrefDeskTop\\PikodAorfLayout.csproj",
+      "projectUniqueName": "D:\\project\\PikodAorfLayout\\PikodAorfLayout\\PikodAorfLayout.csproj",
       "projectName": "PikodAorfLayout",
-      "projectPath": "D:\\עבודה\\PikodHaOrefDeskTop\\PikodAorfLayout.csproj",
-      "packagesPath": "C:\\Users\\omrig\\.nuget\\packages\\",
-      "outputPath": "D:\\עבודה\\PikodHaOrefDeskTop\\obj\\",
+      "projectPath": "D:\\project\\PikodAorfLayout\\PikodAorfLayout\\PikodAorfLayout.csproj",
+      "packagesPath": "C:\\Users\\Gigi\\.nuget\\packages\\",
+      "outputPath": "D:\\project\\PikodAorfLayout\\PikodAorfLayout\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\omrig\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Gigi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -452,7 +447,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

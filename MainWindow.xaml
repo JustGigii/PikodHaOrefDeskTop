@@ -8,10 +8,24 @@
         WindowStartupLocation="Manual"  Top="0"  Height="500" Width="500"  AllowsTransparency="True" WindowStyle="None" Background="Transparent" ShowInTaskbar="False" Visibility="Visible">
     <StackPanel x:Name="pannel" >
         <Image x:Name="image" HorizontalAlignment="Right" Height="121" Margin="0 0 0 8"   Source="/alert.png"/>
-        <StackPanel x:Name="messages">
-            
+        <StackPanel>
+            <!--<Grid>
+                <Image  Source="massage.png" Stretch="Fill" Height="55" HorizontalAlignment="Center" VerticalAlignment="Top"  />
+                <TextBlock Text="נירים" Foreground="White"  FontFamily="Hobo Std" Margin="0,8,20,0" FontSize="36" TextAlignment="Right"/>
+            </Grid>-->
         </StackPanel>
-
+        <Grid>
+            <ItemsControl x:Name="massege" Margin="0,0,0,10"  ItemsSource="{Binding}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Image  Source="massage.png" Stretch="Fill" Height="55" HorizontalAlignment="Center" VerticalAlignment="Top"  />
+                            <TextBlock Text="{Binding data}" Foreground="White"  FontFamily="Hobo Std" Margin="0,8,20,0" FontSize="36" TextAlignment="Right"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
     </StackPanel>
-   
+
 </Window>

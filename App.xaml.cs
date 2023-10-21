@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using PikodAorfLayout.Class;
 using System;
 using System.Collections.Generic;
@@ -30,15 +31,22 @@ namespace PikodAorfLayout
         }
         protected override void OnStartup(StartupEventArgs e)
         {
+            bool isfirst = false;
             AddTostartUp();
             InitializeNotifyIcon();
-            loadstartupjson();
             if (!File.Exists(JsonPath))
             {         
             if (!Directory.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref")))
                 Directory.CreateDirectory(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref"));
             string newtext = "{\"ChoiseAlarm\":\"allcheak\",\"choise\":{}}";
             File.WriteAllText(JsonPath, newtext);
+                isfirst=true;
+            }
+            loadstartupjson();
+            if (isfirst)
+            {
+                Setting settingwin = new Setting();
+                settingwin.Show();
             }
             base.OnStartup(e);
         }
@@ -50,8 +58,9 @@ namespace PikodAorfLayout
         private static void AddTostartUp()
         {
             Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            string str = Assembly.GetExecutingAssembly().Location;
-            key.SetValue("Camaleone", str);
+            string str = Forms.Application.ExecutablePath;
+            key.SetValue("PikodHaoref", str);
+          
         }
         private void InitializeNotifyIcon()
         {
@@ -67,6 +76,7 @@ namespace PikodAorfLayout
         {
             string jsonData = File.ReadAllText(App.JsonPath);
             Config.config = JsonConvert.DeserializeObject<Config>(jsonData);
+            Choise.choiselist = Config.config.choise;
             
 
         }

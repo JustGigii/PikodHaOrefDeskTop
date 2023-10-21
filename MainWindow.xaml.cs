@@ -23,7 +23,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Windows.Forms;
-
+using System.Collections.ObjectModel;
 
 namespace PikodAorfLayout
 {
@@ -32,7 +32,7 @@ namespace PikodAorfLayout
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        List<Alert> emptylist;
         DateTime startTime;
         public MainWindow()
         {
@@ -41,18 +41,25 @@ namespace PikodAorfLayout
             Height = System.Windows.SystemParameters.WorkArea.Height;
             Topmost = true;
             System.Threading.Thread thread = new System.Threading.Thread(cheakjson);
+            emptylist = new List<Alert>();
             thread.Start();
             var a = Choise.choiselist;
 
         }
-
+        private async Task popdetails(List<Alert> showlist)
+        {
+            await this.Dispatcher.Invoke(async () =>
+            {
+                massege.DataContext = new ObservableCollection<Alert>(showlist);
+            });
+        }
         private async void cheakjson()
         {
             startTime = DateTime.Now;
             await Popdata();
             while (true)
             {
-                if (DateTime.Now - startTime > TimeSpan.FromSeconds(15))
+                if (DateTime.Now - startTime > TimeSpan.FromSeconds(4))
                 {
                     await Popdata();
                 }
@@ -61,11 +68,11 @@ namespace PikodAorfLayout
                     await this.Dispatcher.Invoke(async () =>
                     {
                         Visibility = Visibility.Hidden;
-                        messages.Children.Clear();
                     });
+                    popdetails(emptylist);
                 }
 
-                Thread.Sleep(TimeSpan.FromSeconds(5));
+                Thread.Sleep(TimeSpan.FromSeconds(1));
             }
         }
         public async Task Popdata()
@@ -77,24 +84,18 @@ namespace PikodAorfLayout
                 int loop = 7;
                 if (releventData.Count > 7)
                     loop = 15;
-                await this.Dispatcher.Invoke(async () =>
-                {
-                    Visibility = Visibility.Visible;
-                    messages.Children.Clear();
-                });
                 for (int i = 0; i < loop; i++)
                 {
-                    await this.Dispatcher.Invoke(async () => { messages.Children.Clear(); });
-                    if(i > 0) data = await LoadJsonAsync();
+                    if (i > 0) data = await LoadJsonAsync();
                     releventData = Filter(data);
+                    if (releventData.Count() == 0) break;
                     releventData.Sort();
-                    foreach (var item in releventData)
+                    await this.Dispatcher.Invoke(async () =>
                     {
-                        await this.Dispatcher.Invoke(async () =>
-                        {
-                            messages.Children.Add(CreateTextBlock(item.data));
-                        });
-                    }
+                        Visibility = Visibility.Visible;
+                    });
+                    popdetails(releventData);
+
                     Thread.Sleep(TimeSpan.FromSeconds(3));
                 }
             }
@@ -103,8 +104,8 @@ namespace PikodAorfLayout
                 await this.Dispatcher.Invoke(async () =>
                 {
                     Visibility = Visibility.Hidden;
-                    messages.Children.Clear();
                 });
+                popdetails(emptylist);
             }
 
 
@@ -117,13 +118,16 @@ namespace PikodAorfLayout
             if (data == null) return releventData;
             foreach (var alert in data)
             {
-                //if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(24) )
-                if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
+               // if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(24))
+               if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
                 {
+                    if (releventData.Any(e => e.data== alert.data)) continue;
+
                     if (Choise.choiselist.Items.Count > 0)
-                    { 
-                    if (Choise.choiselist.Items.Contains(alert.data))
-                    releventData.Add(alert);
+                    {
+
+                        if (Choise.choiselist.Items.Contains(alert.data))
+                            releventData.Add(alert);
                     }
                     else
                     {
@@ -135,21 +139,21 @@ namespace PikodAorfLayout
             return releventData;
         }
 
-        public TextBlock CreateTextBlock(string text)
-        {
-            var newblock = new TextBlock();
+        //public TextBlock CreateTextBlock(string text)
+        //{
+        //    var newblock = new TextBlock();
 
-            newblock.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/massage.png")));
-            newblock.Text = "בדיקה";
-            newblock.Foreground = Brushes.White;
-            newblock.FontFamily = new FontFamily("Hobo Std");
-            newblock.Width = 500;
-            newblock.Text = text + "  ";
-            newblock.Margin = new Thickness(0, 0, 0, 3);
-            newblock.TextAlignment = TextAlignment.Right;
-            newblock.FontSize = 36;
-            return newblock;
-        }
+        //    newblock.Background = new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/massage.png")));
+        //    newblock.Text = "בדיקה";
+        //    newblock.Foreground = Brushes.White;
+        //    newblock.FontFamily = new FontFamily("Hobo Std");
+        //    newblock.Width = 500;
+        //    newblock.Text = text + "  ";
+        //    newblock.Margin = new Thickness(0, 0, 0, 3);
+        //    newblock.TextAlignment = TextAlignment.Right;
+        //    newblock.FontSize = 36;
+        //    return newblock;
+        //}
         private async Task<Alert[]> LoadJsonAsync()
         {
             HttpClient httpClient = new HttpClient();
@@ -168,7 +172,7 @@ namespace PikodAorfLayout
             catch (Exception ex)
             {
                 // Handle exceptions
-               // MessageBox.Show("Error fetching data: " + ex.Message);
+                // MessageBox.Show("Error fetching data: " + ex.Message);
             }
             return null;
         }

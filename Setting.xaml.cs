@@ -35,15 +35,16 @@ namespace PikodAorfLayout
         public Setting()
         {
             onload = false;
-            choiselist =   Choise.choiselist;
+            choiselist = new Choise();
             choosedistricts = new List<Districts>();
             allcity = new Choise();
             InitializeComponent();
+            clearbox.Visibility = Visibility.Collapsed;
             loadDistrictjson();
             loadautocomplte();
-            
-            config = Config.config;
+            config = new Config(Config.config);
             selectionradio(Config.config.ChoiseAlarm, false);
+            var a = Choise.choiselist;
         }
         private void loadDistrictjson()
         {
@@ -55,7 +56,7 @@ namespace PikodAorfLayout
         {
             foreach (var district in districts)
             {
-                foreach(var choise in district.cities)
+                foreach (var choise in district.cities)
                 {
                     allcity.AddChoise(choise);
                 }
@@ -66,14 +67,16 @@ namespace PikodAorfLayout
             switch (ChoiseAlarm)
             {
                 case "allcheak":
-                    Config.config.ChoiseAlarm = "allcheak";
+                    config.ChoiseAlarm = "allcheak";
                     allcheak.IsChecked = true;
                     DistrictsPanel.Visibility = Visibility.Hidden;
+                    autoTextBox.Visibility = Visibility.Hidden;
                     clearlist();
                     break;
                 case "DistrictsCheck":
                     config.ChoiseAlarm = "DistrictsCheck";
                     DistrictsCheck.IsChecked = true;
+                    autoTextBox.Visibility = Visibility.Hidden;
                     choosedistricts.Clear();
                     if (isfirst) config.choise = new Choise();
                     else
@@ -82,7 +85,7 @@ namespace PikodAorfLayout
                         foreach (var item in config.choise.Items)
                         {
                             var distcirct = districts.Find(e => e.name == item);
-                            
+
                             foreach (var city in distcirct.cities)
                             {
                                 choiselist.AddChoise(city);
@@ -92,8 +95,23 @@ namespace PikodAorfLayout
                             districts.Remove(distcirct);
                         }
                     }
-                    DistrictsPanel.Visibility = Visibility.Visible;
 
+                    DistrictsPanel.Visibility = Visibility.Visible;
+                    break;
+                case "cityCheck":
+                    config.ChoiseAlarm = "cityCheck";
+                    cityCheck.IsChecked = true;
+                    DistrictsPanel.Visibility = Visibility.Hidden;
+                    autoTextBox.Visibility = Visibility.Visible;
+                    if (config.choise is null) config.choise = new Choise();
+                    else
+                    {
+
+                        foreach (var item in config.choise.Items)
+                        {
+                            choiselist.AddChoise(item);
+                        }
+                    }
                     break;
             }
             popDistricts();
@@ -102,15 +120,15 @@ namespace PikodAorfLayout
 
         private void clearlist()
         {
-            config.choise.Clear();
             choiselist.Clear();
             choosedistricts.Clear();
+            Config.config.choise.Clear();
             loadDistrictjson();
         }
 
         void popDistricts()
         {
-            districtscontrol.DataContext =new ObservableCollection<Districts>(districts);
+            districtscontrol.DataContext = new ObservableCollection<Districts>(districts);
             districtscontrolchoose.DataContext = new ObservableCollection<Districts>(choosedistricts);
             choose.DataContext = new ObservableCollection<string>(choiselist.Items);
         }
@@ -157,6 +175,10 @@ namespace PikodAorfLayout
             {
                 panel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f7bd59"));
             }
+            if (sender is Border border)
+            {
+                border.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f7bd59"));
+            }
         }
 
         private void Grid_MouseLeave(object sender, MouseEventArgs e)
@@ -165,11 +187,18 @@ namespace PikodAorfLayout
             {//#f7bd59
                 panel.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffab45"));
             }
+            if (sender is Border border)
+            {
+                border.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffab45"));
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Choise.choiselist = choiselist;
+            Config.config = config;
             string json = JsonConvert.SerializeObject(config);
+            MessageBox.Show("הבחירה שלך נשמרה", "Success", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
 
             File.WriteAllText(App.JsonPath, json, Encoding.UTF8);
@@ -180,7 +209,7 @@ namespace PikodAorfLayout
             if (sender is RadioButton radio && onload)
             {
                 selectionradio(radio.Name, true);
-
+                clearbox.Visibility = (radio.Name.Equals("cityCheck")) ? Visibility.Visible : Visibility.Collapsed;
             }
         }
         private void OpenAutoSuggestionBox()
@@ -237,7 +266,7 @@ namespace PikodAorfLayout
         {
             try
             {
-            
+
                 // Verification.  
                 if (string.IsNullOrEmpty(this.autoTextBox.Text))
                 {
@@ -247,7 +276,7 @@ namespace PikodAorfLayout
                     // Info.  
                     return;
                 }
-
+                if (this.autoList is null || this.autoTextBox.Text == "...הכנס שם ישוב") return;
                 // Settings.  
                 this.autoList.ItemsSource = this.allcity.Items.Where(p => p.Contains(this.autoTextBox.Text)).ToList();
                 // Enable.  
@@ -289,10 +318,11 @@ namespace PikodAorfLayout
                 this.CloseAutoSuggestionBox();
 
                 // Settings.  
-                this.autoTextBox.Text = this.autoList.SelectedItem.ToString();
+                this.autoTextBox.Text = "...הכנס שם ישוב";
                 if (!choiselist.Items.Contains(this.autoList.SelectedItem.ToString()))
-                choiselist.AddChoise(this.autoList.SelectedItem.ToString());
+                    choiselist.AddChoise(this.autoList.SelectedItem.ToString());
                 choose.DataContext = new ObservableCollection<string>(choiselist.Items);
+                config.choise.AddChoise(this.autoList.SelectedItem.ToString());
                 this.autoList.SelectedIndex = -1;
             }
             catch (Exception ex)
@@ -304,6 +334,38 @@ namespace PikodAorfLayout
         }
 
         #endregion
+
+        private void autoTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox text)
+            {
+                if (text.Text == "...הכנס שם ישוב")
+                {
+                    text.Text = "";
+                }
+            }
+        }
+
+        private void autoTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox text)
+            {
+                text.Text = "...הכנס שם ישוב";
+            }
+        }
+
+        private void Button_Click_clear(object sender, RoutedEventArgs e)
+        {
+            choiselist.Clear();
+            Config.config.choise.Clear();
+            autoTextBox.Text = "...הכנס שם ישוב";
+            popDistricts();
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
     }
 
 }

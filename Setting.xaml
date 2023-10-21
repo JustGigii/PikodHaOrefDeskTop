@@ -24,21 +24,24 @@
                 <RowDefinition Height="75"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <Border Grid.Row="0" Grid.Column="1" Background="#FFFFAB45" HorizontalAlignment="Left" Margin="655,0,0,39" RenderTransformOrigin="0.5,0.5" Width="65" CornerRadius="4 20 4 4" MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave" MouseDown="Border_MouseDown">
+                <Image x:Name="image" Source="/deleticon.png" Margin="5" RenderTransformOrigin="0.764,0.5"/>
 
+            </Border>
 
-            <TextBlock HorizontalAlignment="Center" FontSize="36" Foreground="White" FontFamily="heebo" Margin="0,13,0,0" Grid.Column="1" Width="294" TextAlignment="Center" FontWeight="Bold">:הגדרת אלפקציה</TextBlock>
+            <TextBlock HorizontalAlignment="Center" FontSize="36" Foreground="White" FontFamily="Hobo Std" Margin="0,13,0,0" Grid.Column="1" Width="294" TextAlignment="Center" FontWeight="Bold">:הגדרת אלפקציה</TextBlock>
             <StackPanel Grid.Row="1"/>
             <Image HorizontalAlignment="Left" Height="75"  Margin="52,0,0,0" Grid.Column="0" VerticalAlignment="Top" Width="100" Source="/logo.png" />
             <Border  Grid.Row="1"  Grid.Column="0" CornerRadius="20" BorderBrush="#FFE88813" BorderThickness="4,4,4,4" Background="#FFFFAB45" Margin="0,10,0,0" >
             </Border>
-            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="24" Foreground="White" FontFamily="heebo"  Grid.Column="0" Grid.Row="1" Width="200" TextAlignment="Center" FontWeight="Bold" TextDecorations="Underline"> :רשימת מעקב</TextBlock>
+            <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" FontSize="24" Foreground="White" FontFamily="Hobo Std"  Grid.Column="0" Grid.Row="1" Width="200" TextAlignment="Center" FontWeight="Bold" TextDecorations="Underline"> :רשימת מעקב</TextBlock>
             <ScrollViewer Grid.Column="0" Grid.Row="1" Margin="0,40,0,24" FlowDirection="RightToLeft">
                 <Grid Width="180">
                     <ItemsControl x:Name="choose" Margin="0,0,0,10"  ItemsSource="{Binding}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border VerticalAlignment="Bottom"  BorderBrush="#FFE88813" Margin="0" BorderThickness="0,0,0,1" CornerRadius="4" >
-                                    <TextBlock FontSize="18" Foreground="White" FontFamily="heebo" Width="200" TextAlignment="Left"  Text="{Binding}" Margin="5,0,0,0"/>
+                                    <TextBlock FontSize="18" Foreground="White" FontFamily="Hobo Std" Width="200" TextAlignment="Left"  Text="{Binding}" Margin="5,0,0,0"/>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -67,7 +70,7 @@
                                             <ColumnDefinition Width="55"/>
                                         </Grid.ColumnDefinitions >
                                         <Image Margin="0 0 0 0" Grid.Column="1" Source="/deleticon.png" Width="25" Height="25"   />
-                                        <TextBlock Grid.Column="0" FontFamily="heebo"  Foreground="Black"  Text="{Binding name}" FontSize="17" TextAlignment="Left" Margin="6 0 0 0" />
+                                        <TextBlock Grid.Column="0" FontFamily="Hobo Std"  Foreground="Black"  Text="{Binding name}" FontSize="17" TextAlignment="Left" Margin="6 0 0 0" />
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -81,7 +84,7 @@
                                             <ColumnDefinition Width="55"/>
                                         </Grid.ColumnDefinitions >
                                         <Image Margin="0 0 0 0" Grid.Column="1" Source="/addicon.png" Width="25" Height="25"   />
-                                        <TextBlock Grid.Column="0" FontFamily="heebo"  Foreground="White"  Text="{Binding name}" FontSize="17" TextAlignment="Left" Margin="6 0 0 0" />
+                                        <TextBlock Grid.Column="0" FontFamily="Hobo Std"  Foreground="White"  Text="{Binding name}" FontSize="17" TextAlignment="Left" Margin="6 0 0 0" />
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -110,7 +113,7 @@
                              Width="211"     
                              Height="30"    
                              FontSize="18"      
-                             FontFamily="Heebo" Foreground="White"
+                             FontFamily="Hobo Std" Foreground="White"
                              HorizontalAlignment="Center"     
                              VerticalAlignment="Center"     
                              BorderThickness="0"    
@@ -118,7 +121,7 @@
                              HorizontalContentAlignment="Center"    
                              Padding="0,0,0,0"    
                              Background="Transparent"     
-                             TextChanged="AutoTextBox_TextChanged" TextAlignment="Right"/>
+                             TextChanged="AutoTextBox_TextChanged" TextAlignment="Right" GotFocus="autoTextBox_GotFocus" Text="...הכנס שם ישוב" LostFocus="autoTextBox_LostFocus"/>
                 </Border>
 
                 <!-- Auto Suggestion box -->
@@ -128,20 +131,21 @@
                    StaysOpen="False"    
                    Placement="Bottom"
                     HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <ListBox FontFamily="Heebo" Foreground="White" Background="#FFFFAB45"  x:Name="autoList" 
+                    <ListBox FontFamily="Hobo Std" Foreground="White" Background="#FFFFAB45"  x:Name="autoList" 
                          Visibility="Collapsed"   
                          Width="250"    
                          Height="100"    
                          FlowDirection="RightToLeft"
                          SelectionChanged="AutoList_SelectionChanged">
-                        
-                            
+
+
                     </ListBox>
                 </Popup>
             </StackPanel>
+            <Button x:Name="clearbox"  BorderThickness="2" Grid.Column="1" Content="איפוס" HorizontalAlignment="Left" Margin="88,387,0,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFFFAB45" Height="38" Width="75" Foreground="White" BorderBrush="#FFE88813" Click="Button_Click_clear" />
 
         </Grid>
-        
+
     </Border>
 
 </Window>
@@ -153,7 +157,7 @@
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
             <Image Margin="5 0 0 0" Grid.Column="1" Source="/addicon.png" Width="25" Height="25"  />
-            <TextBlock Grid.Column="0" FontFamily="heebo"  Foreground="White"  Text="{Binding name}" FontSize="17" TextAlignment="Left" Margin="6 0 0 0" ></TextBlock>
+            <TextBlock Grid.Column="0" FontFamily="Hobo Std"  Foreground="White"  Text="{Binding name}" FontSize="17" TextAlignment="Left" Margin="6 0 0 0" ></TextBlock>
         </Grid>
     </StackPanel>
 </ItemsControl>-->
