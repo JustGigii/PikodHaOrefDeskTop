@@ -90,3 +90,10 @@ D:\project\PikodAorfLayout\PikodAorfLayout\obj\Release\net6.0-windows\scroll.bam
 D:\project\PikodAorfLayout\PikodAorfLayout\obj\Release\net6.0-windows\Setting.g.cs
 D:\project\PikodAorfLayout\PikodAorfLayout\obj\Release\net6.0-windows\Setting.baml
 D:\project\PikodAorfLayout\PikodAorfLayout\obj\Release\net6.0-windows\PikodAorfLayout.csproj.CopyComplete
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\image\deleticon.png
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\ControlzEx.dll
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\DotNetProjects.Input.Toolkit.dll
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\MahApps.Metro.dll
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\Microsoft.Xaml.Behaviors.dll
+D:\עבודה\PikodHaOrefDeskTop\bin\Release\net6.0-windows\de\MahApps.Metro.resources.dll
+D:\עבודה\PikodHaOrefDeskTop\obj\Release\net6.0-windows\Interop.IWshRuntimeLibrary.dll

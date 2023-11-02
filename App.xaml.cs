@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
+using IWshRuntimeLibrary;
 using Forms = System.Windows.Forms;
 
 namespace PikodAorfLayout
@@ -32,19 +33,20 @@ namespace PikodAorfLayout
         protected override void OnStartup(StartupEventArgs e)
         {
             bool isfirst = false;
-            AddTostartUp();
+            //AddTostartUp();
             InitializeNotifyIcon();
-            if (!File.Exists(JsonPath))
+            if (!System.IO.File.Exists(JsonPath))
             {         
             if (!Directory.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref")))
                 Directory.CreateDirectory(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref"));
             string newtext = "{\"ChoiseAlarm\":\"allcheak\",\"choise\":{}}";
-            File.WriteAllText(JsonPath, newtext);
+                System.IO.File.WriteAllText(JsonPath, newtext);
                 isfirst=true;
             }
             loadstartupjson();
             if (isfirst)
             {
+                startupadder();
                 Setting settingwin = new Setting();
                 settingwin.Show();
             }
@@ -74,11 +76,30 @@ namespace PikodAorfLayout
         }
         private void loadstartupjson()
         {
-            string jsonData = File.ReadAllText(App.JsonPath);
+            string jsonData = System.IO.File.ReadAllText(App.JsonPath);
             Config.config = JsonConvert.DeserializeObject<Config>(jsonData);
             Choise.choiselist = Config.config.choise;
             
 
+        }
+        private void startupadder()
+        {
+            WshShell wshShell = new WshShell();
+            IWshRuntimeLibrary.IWshShortcut shortcut;
+            string startUpFolderPath =
+              Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+
+            // Create the shortcut
+            shortcut =
+              (IWshRuntimeLibrary.IWshShortcut)wshShell.CreateShortcut(
+                startUpFolderPath + "\\" +
+                Forms.Application.ProductName + ".lnk");
+
+            shortcut.TargetPath = Forms.Application.ExecutablePath;
+            shortcut.WorkingDirectory = Forms.Application.StartupPath;
+            shortcut.Description = "pikoad haoref Appliction";
+            shortcut.IconLocation = Forms.Application.StartupPath + @"\icon.ico";
+            shortcut.Save();
         }
 
         private void _notifyIcon_Exit(object? sender, EventArgs e)

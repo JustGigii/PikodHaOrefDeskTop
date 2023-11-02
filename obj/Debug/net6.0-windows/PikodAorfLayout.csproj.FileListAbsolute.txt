@@ -96,3 +96,4 @@ D:\project\PikodAorfLayout\PikodAorfLayout\obj\Debug\net6.0-windows\scroll.baml
 D:\project\PikodAorfLayout\PikodAorfLayout\obj\Debug\net6.0-windows\Setting.g.cs
 D:\project\PikodAorfLayout\PikodAorfLayout\obj\Debug\net6.0-windows\Setting.baml
 D:\project\PikodAorfLayout\PikodAorfLayout\obj\Debug\net6.0-windows\PikodAorfLayout.csproj.CopyComplete
+D:\עבודה\PikodHaOrefDeskTop\obj\Debug\net6.0-windows\Interop.IWshRuntimeLibrary.dll
