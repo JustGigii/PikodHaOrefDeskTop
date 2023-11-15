@@ -1,0 +1,14 @@
+D:\עבודה\PikodHaorefServer\bin\Debug\net7.0\PikodHaorefServer.exe
+D:\עבודה\PikodHaorefServer\bin\Debug\net7.0\PikodHaorefServer.deps.json
+D:\עבודה\PikodHaorefServer\bin\Debug\net7.0\PikodHaorefServer.runtimeconfig.json
+D:\עבודה\PikodHaorefServer\bin\Debug\net7.0\PikodHaorefServer.dll
+D:\עבודה\PikodHaorefServer\bin\Debug\net7.0\PikodHaorefServer.pdb
+D:\עבודה\PikodHaorefServer\obj\Debug\net7.0\PikodHaorefServer.GeneratedMSBuildEditorConfig.editorconfig
+D:\עבודה\PikodHaorefServer\obj\Debug\net7.0\PikodHaorefServer.AssemblyInfoInputs.cache
+D:\עבודה\PikodHaorefServer\obj\Debug\net7.0\PikodHaorefServer.AssemblyInfo.cs
+D:\עבודה\PikodHaorefServer\obj\Debug\net7.0\PikodHaorefServer.csproj.CoreCompileInputs.cache
+D:\עבודה\PikodHaorefServer\obj\Debug\net7.0\PikodHaorefServer.dll
+D:\עבודה\PikodHaorefServer\obj\Debug\net7.0\refint\PikodHaorefServer.dll
+D:\עבודה\PikodHaorefServer\obj\Debug\net7.0\PikodHaorefServer.pdb
+D:\עבודה\PikodHaorefServer\obj\Debug\net7.0\PikodHaorefServer.genruntimeconfig.cache
+D:\עבודה\PikodHaorefServer\obj\Debug\net7.0\ref\PikodHaorefServer.dll
