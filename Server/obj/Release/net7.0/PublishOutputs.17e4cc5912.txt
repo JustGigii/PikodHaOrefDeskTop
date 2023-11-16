@@ -1,0 +1,6 @@
+C:\Users\Gigi\Downloads\Server\PikodHaorefServer.exe
+C:\Users\Gigi\Downloads\Server\PikodHaorefServer.dll
+C:\Users\Gigi\Downloads\Server\PikodHaorefServer.deps.json
+C:\Users\Gigi\Downloads\Server\PikodHaorefServer.runtimeconfig.json
+C:\Users\Gigi\Downloads\Server\PikodHaorefServer.pdb
+C:\Users\Gigi\Downloads\Server\Newtonsoft.Json.dll

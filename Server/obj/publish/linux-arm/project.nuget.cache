@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "Lie+UgCINQJzXQb7+9UjoD1MNowQkC9qK6VvV6Un9e61x6ynBw2z9jeYHg1QLBnNx3Me/dM9LzzlZ4mgJiRwHQ==",
+  "success": true,
+  "projectFilePath": "D:\\project\\PikodHaOrefDeskTop\\Server\\PikodHaorefServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Gigi\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Gigi\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-arm\\7.0.1\\microsoft.netcore.app.runtime.linux-arm.7.0.1.nupkg.sha512",
+    "C:\\Users\\Gigi\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-arm\\7.0.1\\microsoft.aspnetcore.app.runtime.linux-arm.7.0.1.nupkg.sha512",
+    "C:\\Users\\Gigi\\.nuget\\packages\\microsoft.netcore.app.host.linux-arm\\7.0.1\\microsoft.netcore.app.host.linux-arm.7.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

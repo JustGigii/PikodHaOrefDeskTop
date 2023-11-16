@@ -31,12 +31,12 @@ namespace PikodHaorefServer
                 alerts.Sort();
                 if (alerts != null && alerts.Count > 0)
                 {
-                    _server.Broadcast(JsonConvert.SerializeObject(alerts));
+                    _server.Broadcast(Newtonsoft.Json.JsonConvert.SerializeObject(alerts));
                 }
                 Thread.Sleep(TimeSpan.FromSeconds(0.5));
             }
         }
-        private async Task<Alert[]> LoadJsonAsync()
+        private async Task<List<Alert>> LoadJsonAsync()
         {
             HttpClient httpClient = new HttpClient();
             // URL of the JSON data
@@ -48,7 +48,7 @@ namespace PikodHaorefServer
 
                 // If your JSON represents an object, you can define a class and deserialize to it.
                 // Here I'm using dynamic for simplicity, but in a real-world scenario, it's better to deserialize to a specific class.
-                Alert[] data = System.Text.Json.JsonSerializer.Deserialize<Alert[]>(response);
+                List<Alert> data = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Alert>>(response);
                 return data;
             }
             catch (Exception ex)
@@ -59,14 +59,14 @@ namespace PikodHaorefServer
             }
 
         }
-        private List<Alert> Filter(Alert[] data)
+        private List<Alert> Filter(List<Alert> data)
         {
             List<Alert> releventData = new List<Alert>();
             if (data == null) return releventData;
             foreach (var alert in data)
             {
-                  if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(24))
-               // if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
+                  if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(25))
+                //if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
                 {
                     releventData.Add(alert);
                 }

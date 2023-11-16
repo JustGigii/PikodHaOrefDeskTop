@@ -134,8 +134,8 @@ namespace PikodAorfLayout
         }
         private void connection()
         {
-            var serverIp = "127.0.0.1";
-            var serverPort = 8888;
+            var serverIp = "129.159.128.159";
+            var serverPort = 8080;
             try
             {
                 tcpClient = new TcpClient(serverIp, serverPort);

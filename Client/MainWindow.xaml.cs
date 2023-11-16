@@ -43,6 +43,7 @@ namespace PikodAorfLayout
             Left = System.Windows.SystemParameters.WorkArea.Width - Width;
             Height = System.Windows.SystemParameters.WorkArea.Height;
             Topmost = true;
+            
             tcpClient = App.tcpClient;
             System.Threading.Thread thread = (tcpClient is object) ? new System.Threading.Thread(GetFromServer): new System.Threading.Thread(CheakDirecJson); 
             emptylist = new List<Alert>();
@@ -60,13 +61,17 @@ namespace PikodAorfLayout
         }
         private async void GetFromServer()
         {
+            await this.Dispatcher.Invoke(async () =>
+            {
+                Visibility = Visibility.Hidden;
+            });
             while (true)
             {
-                string response = RecvieAlert();
                 try
                 {
-                    List<Alert> alertlist = Filter(JsonSerializer.Deserialize<Alert[]>(response));
 
+                    string response = RecvieAlert();
+                    List<Alert> alertlist = Filter(JsonSerializer.Deserialize<Alert[]>(response));
 
                     if (alertlist.Count > 0)
                     {
@@ -86,7 +91,12 @@ namespace PikodAorfLayout
 
                     }
                 }
-                catch (Exception ex) { }
+                catch (Exception ex) {
+                    await this.Dispatcher.Invoke(async () =>
+                    {
+                        Visibility = Visibility.Hidden;
+                    });
+                }
             }
      
         }

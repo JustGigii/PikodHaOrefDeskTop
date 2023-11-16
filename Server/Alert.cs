@@ -1,5 +1,8 @@
-﻿namespace PikodHaorefServer
+﻿using Newtonsoft.Json;
+
+namespace PikodHaorefServer
 {
+   
     internal class Alert : IComparable
     {
         public string alertDate { get; set; }
@@ -7,6 +10,14 @@
         public string data { get; set; }
         public int category { get; set; }
 
+        [JsonConstructor]
+        public Alert(string alertDate, string title, string data,int category) 
+        {
+            this.alertDate = alertDate;
+            this.title = title; 
+            this.data = data;
+            this.category = category;
+        }
         public int CompareTo(object? obj)
         {
             Alert other = obj as Alert;

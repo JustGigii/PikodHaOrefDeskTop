@@ -1,0 +1,17 @@
+D:\project\PikodHaOrefDeskTop\Server\bin\Release\net7.0\linux-x64\PikodHaorefServer
+D:\project\PikodHaOrefDeskTop\Server\bin\Release\net7.0\linux-x64\PikodHaorefServer.deps.json
+D:\project\PikodHaOrefDeskTop\Server\bin\Release\net7.0\linux-x64\PikodHaorefServer.runtimeconfig.json
+D:\project\PikodHaOrefDeskTop\Server\bin\Release\net7.0\linux-x64\PikodHaorefServer.dll
+D:\project\PikodHaOrefDeskTop\Server\bin\Release\net7.0\linux-x64\PikodHaorefServer.pdb
+D:\project\PikodHaOrefDeskTop\Server\bin\Release\net7.0\linux-x64\Newtonsoft.Json.dll
+D:\project\PikodHaOrefDeskTop\Server\obj\Release\net7.0\linux-x64\PikodHaorefServer.csproj.AssemblyReference.cache
+D:\project\PikodHaOrefDeskTop\Server\obj\Release\net7.0\linux-x64\PikodHaorefServer.GeneratedMSBuildEditorConfig.editorconfig
+D:\project\PikodHaOrefDeskTop\Server\obj\Release\net7.0\linux-x64\PikodHaorefServer.AssemblyInfoInputs.cache
+D:\project\PikodHaOrefDeskTop\Server\obj\Release\net7.0\linux-x64\PikodHaorefServer.AssemblyInfo.cs
+D:\project\PikodHaOrefDeskTop\Server\obj\Release\net7.0\linux-x64\PikodHaorefServer.csproj.CoreCompileInputs.cache
+D:\project\PikodHaOrefDeskTop\Server\obj\Release\net7.0\linux-x64\PikodHaorefServer.csproj.CopyComplete
+D:\project\PikodHaOrefDeskTop\Server\obj\Release\net7.0\linux-x64\PikodHaorefServer.dll
+D:\project\PikodHaOrefDeskTop\Server\obj\Release\net7.0\linux-x64\refint\PikodHaorefServer.dll
+D:\project\PikodHaOrefDeskTop\Server\obj\Release\net7.0\linux-x64\PikodHaorefServer.pdb
+D:\project\PikodHaOrefDeskTop\Server\obj\Release\net7.0\linux-x64\PikodHaorefServer.genruntimeconfig.cache
+D:\project\PikodHaOrefDeskTop\Server\obj\Release\net7.0\linux-x64\ref\PikodHaorefServer.dll
