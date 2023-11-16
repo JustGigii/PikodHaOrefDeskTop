@@ -24,6 +24,8 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
+using System.Net.Sockets;
+using System.IO;
 
 namespace PikodAorfLayout
 {
@@ -34,18 +36,21 @@ namespace PikodAorfLayout
     {
         List<Alert> emptylist;
         DateTime startTime;
+        TcpClient tcpClient;
         public MainWindow()
-        {
+        { 
             InitializeComponent();
             Left = System.Windows.SystemParameters.WorkArea.Width - Width;
             Height = System.Windows.SystemParameters.WorkArea.Height;
             Topmost = true;
-            System.Threading.Thread thread = new System.Threading.Thread(cheakjson);
+            tcpClient = App.tcpClient;
+            System.Threading.Thread thread = (tcpClient is object) ? new System.Threading.Thread(GetFromServer): new System.Threading.Thread(CheakDirecJson); 
             emptylist = new List<Alert>();
             thread.Start();
-            var a = Choise.choiselist;
+          //  var a = Choise.choiselist;
 
         }
+       
         private async Task popdetails(List<Alert> showlist)
         {
             await this.Dispatcher.Invoke(async () =>
@@ -53,7 +58,83 @@ namespace PikodAorfLayout
                 massege.DataContext = new ObservableCollection<Alert>(showlist);
             });
         }
-        private async void cheakjson()
+        private async void GetFromServer()
+        {
+            while (true)
+            {
+                string response = RecvieAlert();
+                try
+                {
+                    List<Alert> alertlist = Filter(JsonSerializer.Deserialize<Alert[]>(response));
+
+
+                    if (alertlist.Count > 0)
+                    {
+                        await this.Dispatcher.Invoke(async () =>
+                        {
+                            Visibility = Visibility.Visible;
+                        });
+                        await popdetails(alertlist);
+                    }
+                    else
+                    {
+                        await this.Dispatcher.Invoke(async () =>
+                        {
+                            Visibility = Visibility.Hidden;
+                        });
+                        popdetails(emptylist);
+
+                    }
+                }
+                catch (Exception ex) { }
+            }
+     
+        }
+
+        private string RecvieAlert()
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+
+                do
+                {
+                    bytesRead = tcpClient.GetStream().Read(buffer, 0, buffer.Length);
+                    memoryStream.Write(buffer, 0, bytesRead);
+                } while (bytesRead == buffer.Length);
+
+                string response = Encoding.UTF8.GetString(memoryStream.ToArray());
+                return response;
+            }
+
+        }
+        private List<Alert> Filter(Alert[] data)
+        {
+            List<Alert> releventData = new List<Alert>();
+            if (data == null) return releventData;
+            foreach (var alert in data)
+            {
+                    if (releventData.Any(e => e.data == alert.data)) continue;
+
+                    if (Choise.choiselist.Items.Count > 0)
+                    {
+
+                        if (Choise.choiselist.Items.Contains(alert.data))
+                            releventData.Add(alert);
+                    }
+                    else
+                    {
+                        releventData.Add(alert);
+                    }
+
+            }
+
+            return releventData;
+        }
+        //######################################################### Conect direct to json ##################################################################
+     
+        private async void CheakDirecJson()
         {
             startTime = DateTime.Now;
             await Popdata();
@@ -75,10 +156,16 @@ namespace PikodAorfLayout
                 Thread.Sleep(TimeSpan.FromSeconds(1));
             }
         }
+        /// <summary>
+        /// this function is the logic form get the json 
+        /// in the way when few people send requst
+        /// he mannger not to get ban
+        /// </summary>
+        /// <returns> show list for alert. </returns>
         public async Task Popdata()
         {
             Alert[] data = await LoadJsonAsync();
-            List<Alert> releventData = Filter(data);
+            List<Alert> releventData = FilterWithTimer(data);
             if (releventData.Count() > 0)
             {
                 int loop = 7;
@@ -87,7 +174,7 @@ namespace PikodAorfLayout
                 for (int i = 0; i < loop; i++)
                 {
                     if (i > 0) data = await LoadJsonAsync();
-                    releventData = Filter(data);
+                    releventData = FilterWithTimer(data);
                     if (releventData.Count() == 0) break;
                     releventData.Sort();
                     await this.Dispatcher.Invoke(async () =>
@@ -112,16 +199,20 @@ namespace PikodAorfLayout
 
         }
 
-        private List<Alert> Filter(Alert[] data)
+        /// <summary>
+        /// This is old filter when I don't use server
+        /// this filter cheak time 
+        /// </summary>
+        private List<Alert> FilterWithTimer(Alert[] data)
         {
             List<Alert> releventData = new List<Alert>();
             if (data == null) return releventData;
             foreach (var alert in data)
             {
-               // if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(24))
-               if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
+                // if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(24))
+                if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
                 {
-                    if (releventData.Any(e => e.data== alert.data)) continue;
+                    if (releventData.Any(e => e.data == alert.data)) continue;
 
                     if (Choise.choiselist.Items.Count > 0)
                     {
@@ -138,6 +229,8 @@ namespace PikodAorfLayout
 
             return releventData;
         }
+
+        // before ItemsControl
 
         //public TextBlock CreateTextBlock(string text)
         //{

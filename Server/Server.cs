@@ -26,8 +26,9 @@ namespace PikodHaorefServer
             while (true)
             {
                 TcpClient client = tcpListener.AcceptTcpClient();
+                IPEndPoint remoteIpEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
                 clients.Add(client);
-                Console.WriteLine("new client: "+client.Client.RemoteEndPoint.AddressFamily);
+                Console.WriteLine("new client: "+ remoteIpEndPoint.Address+":"+ remoteIpEndPoint.Port);
                 // Handle each client in a separate thread
                 Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClient));
                 clientThread.Start(client);
@@ -58,7 +59,7 @@ namespace PikodHaorefServer
                     break;
 
                 // Convert the bytes to a string
-                string clientMessage = Encoding.ASCII.GetString(message, 0, bytesRead);
+                string clientMessage = Encoding.UTF8.GetString(message, 0, bytesRead);
                 Console.WriteLine($"Received: {clientMessage}");
 
                 // Broadcast the message to all clients
@@ -77,7 +78,7 @@ namespace PikodHaorefServer
                 if (client != excludeClient)
                 {
                     NetworkStream clientStream = client.GetStream();
-                    byte[] broadcastMessage = Encoding.ASCII.GetBytes(message);
+                    byte[] broadcastMessage = Encoding.UTF8.GetBytes(message);
                     clientStream.Write(broadcastMessage, 0, broadcastMessage.Length);
                     clientStream.Flush();
                 }

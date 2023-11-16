@@ -15,6 +15,8 @@ using System.Windows;
 using System.Windows.Shapes;
 using IWshRuntimeLibrary;
 using Forms = System.Windows.Forms;
+using PikodAorfLayout.data;
+using System.Net.Sockets;
 
 namespace PikodAorfLayout
 {
@@ -24,7 +26,7 @@ namespace PikodAorfLayout
     public partial class App : Application
     {   
         public static string JsonPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref", "config.json");
-       
+        public static TcpClient tcpClient;
         private readonly Forms.NotifyIcon _notifyIcon;
         public App()
         {
@@ -32,6 +34,7 @@ namespace PikodAorfLayout
         }
         protected override void OnStartup(StartupEventArgs e)
         {
+            connection();
             bool isfirst = false;
             //AddTostartUp();
             InitializeNotifyIcon();
@@ -78,7 +81,25 @@ namespace PikodAorfLayout
         {
             string jsonData = System.IO.File.ReadAllText(App.JsonPath);
             Config.config = JsonConvert.DeserializeObject<Config>(jsonData);
+            if(Config.config.ChoiseAlarm == "DistrictsCheck") 
+            {
+                jsonData = System.IO.File.ReadAllText("data/areas_data.json");
+                var districts = JsonConvert.DeserializeObject<List<Districts>>(jsonData);
+                Choise.choiselist = new Choise();
+                foreach (var item in Config.config.choise.Items)
+                {
+                    var distcirct = districts.Find(e => e.name == item);
+
+                    foreach (var city in distcirct.cities)
+                    {
+                        Choise.choiselist.AddChoise(city);
+                    }
+                }
+            }
+            else
+            {
             Choise.choiselist = Config.config.choise;
+            }
             
 
         }
@@ -110,6 +131,18 @@ namespace PikodAorfLayout
         {
             Setting settingwin = new Setting();
             settingwin.Show();
+        }
+        private void connection()
+        {
+            var serverIp = "127.0.0.1";
+            var serverPort = 8888;
+            try
+            {
+                tcpClient = new TcpClient(serverIp, serverPort);
+            }
+            catch { tcpClient = null; }
+            Console.WriteLine($"Connected to {serverIp} on port {serverPort}");
+
         }
     }
 }

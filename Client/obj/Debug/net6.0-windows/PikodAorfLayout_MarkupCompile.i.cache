@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\עבודה\PikodHaOrefDeskTop\obj\Debug\net6.0-windows\
+D:\project\PikodHaOrefDeskTop\Client\obj\Debug\net6.0-windows\
 PikodAorfLayout
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\עבודה\PikodHaOrefDeskTop\App.xaml
+D:\project\PikodHaOrefDeskTop\Client\App.xaml
 31040558434
 1-1606303973
-11-152495936
-209-2055911568
+10-363620445
+209-626362352
 MainWindow.xaml;scroll.xaml;Setting.xaml;
 
 False

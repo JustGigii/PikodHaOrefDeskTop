@@ -123,6 +123,7 @@ namespace PikodAorfLayout
             choiselist.Clear();
             choosedistricts.Clear();
             Config.config.choise.Clear();
+            Choise.choiselist.Clear();
             loadDistrictjson();
         }
 

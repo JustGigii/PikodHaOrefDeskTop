@@ -1,17 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "NJfJ8jDxf/oi0daqG+BcW8Xt0DrWbDmFdFxnd9WYVemcTE/Ou8DRSz7K2WsJrozpH25H22Ll56wZWsN68vvvag==",
+  "dgSpecHash": "kCkRkUWPxRo7op5txEfo498hCI2j80z3SbO300jxJY3L+lQUdFiDmJsYyrErngnergTtthA5+BjwHlMJKhrShQ==",
   "success": true,
-  "projectFilePath": "D:\\עבודה\\PikodHaOrefDeskTop\\PikodAorfLayout.csproj",
+  "projectFilePath": "D:\\project\\PikodHaOrefDeskTop\\Client\\PikodAorfLayout.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\omrig\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",
-    "C:\\Users\\omrig\\.nuget\\packages\\dotnetprojects.wpftoolkit.input\\6.1.94\\dotnetprojects.wpftoolkit.input.6.1.94.nupkg.sha512",
-    "C:\\Users\\omrig\\.nuget\\packages\\mahapps.metro\\2.4.10\\mahapps.metro.2.4.10.nupkg.sha512",
-    "C:\\Users\\omrig\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
-    "C:\\Users\\omrig\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
-    "C:\\Users\\omrig\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
-    "C:\\Users\\omrig\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
-    "C:\\Users\\omrig\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
+    "C:\\Users\\Gigi\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",
+    "C:\\Users\\Gigi\\.nuget\\packages\\dotnetprojects.wpftoolkit.input\\6.1.94\\dotnetprojects.wpftoolkit.input.6.1.94.nupkg.sha512",
+    "C:\\Users\\Gigi\\.nuget\\packages\\mahapps.metro\\2.4.10\\mahapps.metro.2.4.10.nupkg.sha512",
+    "C:\\Users\\Gigi\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
+    "C:\\Users\\Gigi\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+    "C:\\Users\\Gigi\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Gigi\\.nuget\\packages\\system.drawing.common\\7.0.0\\system.drawing.common.7.0.0.nupkg.sha512",
+    "C:\\Users\\Gigi\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
   ],
   "logs": []
 }

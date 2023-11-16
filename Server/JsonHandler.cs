@@ -28,10 +28,11 @@ namespace PikodHaorefServer
             while (!_isClose)
             {
                 var alerts = Filter(await LoadJsonAsync());
+                alerts.Sort();
                 if (alerts != null && alerts.Count > 0)
                 {
                     _server.Broadcast(JsonConvert.SerializeObject(alerts));
-                 }
+                }
                 Thread.Sleep(TimeSpan.FromSeconds(0.5));
             }
         }
@@ -64,8 +65,8 @@ namespace PikodHaorefServer
             if (data == null) return releventData;
             foreach (var alert in data)
             {
-                // if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(24))
-                if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
+                  if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(24))
+               // if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
                 {
                     releventData.Add(alert);
                 }
