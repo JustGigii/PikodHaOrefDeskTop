@@ -42,12 +42,13 @@ namespace PikodHaorefServer
             byte[] message = new byte[4096];
             int bytesRead;
 
-            while (true)
+            while (tcpClient.Connected)
             {
                 bytesRead = 0;
 
                 try
                 {
+                  
                     bytesRead = clientStream.Read(message, 0, 4096);
                 }
                 catch

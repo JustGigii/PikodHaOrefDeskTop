@@ -17,6 +17,7 @@ using IWshRuntimeLibrary;
 using Forms = System.Windows.Forms;
 using PikodAorfLayout.data;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace PikodAorfLayout
 {
@@ -27,15 +28,22 @@ namespace PikodAorfLayout
     {   
         public static string JsonPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref", "config.json");
         public static TcpClient tcpClient;
+        public static bool isAppOpen;
         private readonly Forms.NotifyIcon _notifyIcon;
+        private Thread runreconnect;
         public App()
         {
             _notifyIcon = new Forms.NotifyIcon();
+            runreconnect = new Thread(TryToReconect);
+            
         }
         protected override void OnStartup(StartupEventArgs e)
         {
             connection();
+            
             bool isfirst = false;
+            isAppOpen = true;
+            runreconnect.Start();
             //AddTostartUp();
             InitializeNotifyIcon();
             if (!System.IO.File.Exists(JsonPath))
@@ -54,6 +62,15 @@ namespace PikodAorfLayout
                 settingwin.Show();
             }
             base.OnStartup(e);
+        }
+
+        void TryToReconect()
+        {
+            while(isAppOpen) 
+            {
+                if (tcpClient == null || !tcpClient.Connected ) connection();
+                else if (!tcpClient.Connected) tcpClient = null;
+            }
         }
         protected override void OnExit(ExitEventArgs e)
         {
@@ -134,14 +151,14 @@ namespace PikodAorfLayout
         }
         private void connection()
         {
-            var serverIp = "129.159.128.159";
-            var serverPort = 8080;
+             //var serverIp = "129.159.128.159";
+             var serverIp = "127.0.0.1";
+             var serverPort = 8080;
             try
             {
                 tcpClient = new TcpClient(serverIp, serverPort);
             }
             catch { tcpClient = null; }
-            Console.WriteLine($"Connected to {serverIp} on port {serverPort}");
 
         }
     }

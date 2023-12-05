@@ -36,22 +36,33 @@ namespace PikodAorfLayout
     {
         List<Alert> emptylist;
         DateTime startTime;
-        TcpClient tcpClient;
+  
         public MainWindow()
-        { 
+        {
             InitializeComponent();
             Left = System.Windows.SystemParameters.WorkArea.Width - Width;
             Height = System.Windows.SystemParameters.WorkArea.Height;
             Topmost = true;
-            
-            tcpClient = App.tcpClient;
-            System.Threading.Thread thread = (tcpClient is object) ? new System.Threading.Thread(GetFromServer): new System.Threading.Thread(CheakDirecJson); 
+
+
+            // System.Threading.Thread thread = (tcpClient is object) ? new System.Threading.Thread(GetFromServer): new System.Threading.Thread(CheakDirecJson); 
+            System.Threading.Thread thread = new System.Threading.Thread(lodingConnection);
             emptylist = new List<Alert>();
             thread.Start();
-          //  var a = Choise.choiselist;
+            //  var a = Choise.choiselist;
 
         }
-       
+        private async void lodingConnection()
+        {
+            while (App.isAppOpen)
+            {
+                if (App.tcpClient is Object && App.tcpClient.Connected) GetFromServer();
+                else CheakDirecJson();
+            }
+        }
+
+
+        //######################################## show with server connection####################################### 
         private async Task popdetails(List<Alert> showlist)
         {
             await this.Dispatcher.Invoke(async () =>
@@ -65,40 +76,38 @@ namespace PikodAorfLayout
             {
                 Visibility = Visibility.Hidden;
             });
-            while (true)
+            try
             {
-                try
+
+                string response = RecvieAlert();
+                List<Alert> alertlist = Filter(JsonSerializer.Deserialize<Alert[]>(response));
+
+                if (alertlist.Count > 0)
                 {
-
-                    string response = RecvieAlert();
-                    List<Alert> alertlist = Filter(JsonSerializer.Deserialize<Alert[]>(response));
-
-                    if (alertlist.Count > 0)
+                    await this.Dispatcher.Invoke(async () =>
                     {
-                        await this.Dispatcher.Invoke(async () =>
-                        {
-                            Visibility = Visibility.Visible;
-                        });
-                        await popdetails(alertlist);
-                    }
-                    else
-                    {
-                        await this.Dispatcher.Invoke(async () =>
-                        {
-                            Visibility = Visibility.Hidden;
-                        });
-                        popdetails(emptylist);
-
-                    }
+                        Visibility = Visibility.Visible;
+                    });
+                    await popdetails(alertlist);
                 }
-                catch (Exception ex) {
+                else
+                {
                     await this.Dispatcher.Invoke(async () =>
                     {
                         Visibility = Visibility.Hidden;
                     });
+                    popdetails(emptylist);
+
                 }
             }
-     
+            catch (Exception ex)
+            {
+                await this.Dispatcher.Invoke(async () =>
+                {
+                    Visibility = Visibility.Hidden;
+                });
+            }
+
         }
 
         private string RecvieAlert()
@@ -110,7 +119,7 @@ namespace PikodAorfLayout
 
                 do
                 {
-                    bytesRead = tcpClient.GetStream().Read(buffer, 0, buffer.Length);
+                    bytesRead = App.tcpClient.GetStream().Read(buffer, 0, buffer.Length);
                     memoryStream.Write(buffer, 0, bytesRead);
                 } while (bytesRead == buffer.Length);
 
@@ -125,46 +134,47 @@ namespace PikodAorfLayout
             if (data == null) return releventData;
             foreach (var alert in data)
             {
-                    if (releventData.Any(e => e.data == alert.data)) continue;
+                if (releventData.Any(e => e.data == alert.data)) continue;
 
-                    if (Choise.choiselist.Items.Count > 0)
-                    {
+                if (Choise.choiselist.Items.Count > 0)
+                {
 
-                        if (Choise.choiselist.Items.Contains(alert.data))
-                            releventData.Add(alert);
-                    }
-                    else
-                    {
+                    if (Choise.choiselist.Items.Contains(alert.data))
                         releventData.Add(alert);
-                    }
+                }
+                else
+                {
+                    releventData.Add(alert);
+                }
 
             }
 
             return releventData;
         }
         //######################################################### Conect direct to json ##################################################################
-     
+
         private async void CheakDirecJson()
         {
+            bool isRun = true;
             startTime = DateTime.Now;
             await Popdata();
-            while (true)
-            {
-                if (DateTime.Now - startTime > TimeSpan.FromSeconds(4))
-                {
-                    await Popdata();
-                }
-                else
-                {
-                    await this.Dispatcher.Invoke(async () =>
-                    {
-                        Visibility = Visibility.Hidden;
-                    });
-                    popdetails(emptylist);
-                }
 
-                Thread.Sleep(TimeSpan.FromSeconds(1));
+            if (App.tcpClient != null && App.tcpClient.Connected) { isRun = false; }
+            if (DateTime.Now - startTime > TimeSpan.FromSeconds(4))
+            {
+                await Popdata();
             }
+            else
+            {
+                await this.Dispatcher.Invoke(async () =>
+                {
+                    Visibility = Visibility.Hidden;
+                });
+                popdetails(emptylist);
+            }
+
+            Thread.Sleep(TimeSpan.FromSeconds(1));
+
         }
         /// <summary>
         /// this function is the logic form get the json 

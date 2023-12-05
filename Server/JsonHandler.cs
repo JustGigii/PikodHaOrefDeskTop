@@ -31,6 +31,7 @@ namespace PikodHaorefServer
                 alerts.Sort();
                 if (alerts != null && alerts.Count > 0)
                 {
+
                     _server.Broadcast(Newtonsoft.Json.JsonConvert.SerializeObject(alerts));
                 }
                 Thread.Sleep(TimeSpan.FromSeconds(0.5));
@@ -53,9 +54,10 @@ namespace PikodHaorefServer
             }
             catch (Exception ex)
             {
-                throw new Exception("can't accses json: " + ex.Message);
+                //throw new Exception("can't accses json: " + ex.Message);
                 // Handle exceptions
                 // MessageBox.Show("Error fetching data: " + ex.Message);
+                return null;
             }
 
         }
@@ -65,9 +67,10 @@ namespace PikodHaorefServer
             if (data == null) return releventData;
             foreach (var alert in data)
             {
-                  if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(25))
-                //if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
+                  //if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(25))
+               if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
                 {
+                    Console.WriteLine(DateTime.Now);
                     releventData.Add(alert);
                 }
             }
