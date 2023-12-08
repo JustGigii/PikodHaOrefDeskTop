@@ -12,7 +12,7 @@ namespace PikodAorfLayout.Class
         {
 
         }
-        public massge(string data, double size,double FontSize)
+        public massge(string data, float size,short FontSize)
         {
             this.data = data;
             this.Height = size;
@@ -21,8 +21,8 @@ namespace PikodAorfLayout.Class
             
         }
         public string data { get; set; }
-        public double Height { get; set; }
-        public double FontSize { get; set; }
+        public float Height { get; set; }
+        public short FontSize { get; set; }
 
     }
 }

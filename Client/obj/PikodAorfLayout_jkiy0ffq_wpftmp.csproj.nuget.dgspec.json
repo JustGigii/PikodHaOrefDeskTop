@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\project\\PikodHaOrefDeskTop\\Client\\PikodAorfLayout.csproj": {}
+  },
+  "projects": {
+    "D:\\project\\PikodHaOrefDeskTop\\Client\\PikodAorfLayout.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\project\\PikodHaOrefDeskTop\\Client\\PikodAorfLayout.csproj",
+        "projectName": "PikodAorfLayout",
+        "projectPath": "D:\\project\\PikodHaOrefDeskTop\\Client\\PikodAorfLayout.csproj",
+        "packagesPath": "C:\\Users\\Gigi\\.nuget\\packages\\",
+        "outputPath": "D:\\project\\PikodHaOrefDeskTop\\Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Gigi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "DotNetProjects.WpfToolkit.Input": {
+              "target": "Package",
+              "version": "[6.1.94, )"
+            },
+            "MahApps.Metro": {
+              "target": "Package",
+              "version": "[2.4.10, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

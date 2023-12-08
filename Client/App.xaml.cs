@@ -64,12 +64,13 @@ namespace PikodAorfLayout
             base.OnStartup(e);
         }
 
-        void TryToReconect()
+        async void TryToReconect()
         {
             while(isAppOpen) 
             {
                 if (tcpClient == null || !tcpClient.Connected ) connection();
                 else if (!tcpClient.Connected) tcpClient = null;
+                await Task.Delay(75);
             }
         }
         protected override void OnExit(ExitEventArgs e)
@@ -86,8 +87,11 @@ namespace PikodAorfLayout
         }
         private void InitializeNotifyIcon()
         {
+            using (MemoryStream iconStream = new MemoryStream(System.IO.File.ReadAllBytes("icon.ico")))
+            {
+                _notifyIcon.Icon = new System.Drawing.Icon(iconStream);
+            }
             _notifyIcon.Visible = true;
-            _notifyIcon.Icon = new System.Drawing.Icon("icon.ico");
             _notifyIcon.Text= "התראות פיקוד העורף";
             _notifyIcon.DoubleClick += _notifyIcon_Click;
             _notifyIcon.ContextMenuStrip = new Forms.ContextMenuStrip();
@@ -151,9 +155,9 @@ namespace PikodAorfLayout
         }
         private void connection()
         {
-             var serverIp = "129.159.128.159";
-             //var serverIp = "127.0.0.1";
-             var serverPort = 8080;
+            string serverIp = "129.159.128.159";
+            //string serverIp = "127.0.0.1";
+            short serverPort = 8080;
             try
             {
                 tcpClient = new TcpClient(serverIp, serverPort);
