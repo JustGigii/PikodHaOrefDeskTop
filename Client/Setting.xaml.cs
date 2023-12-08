@@ -32,6 +32,7 @@ namespace PikodAorfLayout
         private Choise choiselist;
         private Config config;
         private bool onload;
+        private Window mainWindows;
         public Setting()
         {
             onload = false;
@@ -43,9 +44,11 @@ namespace PikodAorfLayout
             loadDistrictjson();
             loadautocomplte();
             config = new Config(Config.config);
+            ;
             selectionradio(Config.config.ChoiseAlarm, false);
             var a = Choise.choiselist;
         }
+
         private void loadDistrictjson()
         {
             string jsonData = File.ReadAllText("data/areas_data.json");
@@ -366,6 +369,16 @@ namespace PikodAorfLayout
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
+        }
+
+        private void Button_Size_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                Config.config.Size = button.Name;
+                config.Size = button.Name;
+                ((MainWindow)System.Windows.Application.Current.MainWindow).LoadExmple();
+            }
         }
     }
 

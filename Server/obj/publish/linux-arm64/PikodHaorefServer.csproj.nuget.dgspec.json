@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\עבודה\\PikodHaOrefDeskTop\\Server\\PikodHaorefServer.csproj": {}
+    "D:\\project\\PikodHaOrefDeskTop\\Server\\PikodHaorefServer.csproj": {}
   },
   "projects": {
-    "D:\\עבודה\\PikodHaOrefDeskTop\\Server\\PikodHaorefServer.csproj": {
+    "D:\\project\\PikodHaOrefDeskTop\\Server\\PikodHaorefServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\עבודה\\PikodHaOrefDeskTop\\Server\\PikodHaorefServer.csproj",
+        "projectUniqueName": "D:\\project\\PikodHaOrefDeskTop\\Server\\PikodHaorefServer.csproj",
         "projectName": "PikodHaorefServer",
-        "projectPath": "D:\\עבודה\\PikodHaOrefDeskTop\\Server\\PikodHaorefServer.csproj",
-        "packagesPath": "C:\\Users\\omrig\\.nuget\\packages\\",
-        "outputPath": "D:\\עבודה\\PikodHaOrefDeskTop\\Server\\obj\\publish\\linux-arm64\\",
+        "projectPath": "D:\\project\\PikodHaOrefDeskTop\\Server\\PikodHaorefServer.csproj",
+        "packagesPath": "C:\\Users\\Gigi\\.nuget\\packages\\",
+        "outputPath": "D:\\project\\PikodHaOrefDeskTop\\Server\\obj\\publish\\linux-arm64\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\omrig\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Gigi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -63,15 +59,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.linux-arm64",
-              "version": "[7.0.11, 7.0.11]"
+              "version": "[7.0.1, 7.0.1]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.linux-arm64",
-              "version": "[7.0.11, 7.0.11]"
+              "version": "[7.0.1, 7.0.1]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.linux-arm64",
-              "version": "[7.0.11, 7.0.11]"
+              "version": "[7.0.1, 7.0.1]"
             }
           ],
           "frameworkReferences": {
@@ -79,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

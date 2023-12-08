@@ -36,14 +36,17 @@ namespace PikodAorfLayout
     {
         List<Alert> emptylist;
         DateTime startTime;
-  
+        List<Alert> hestory;
+        double massgesize;
+        int massgefont;
         public MainWindow()
         {
+            Name = "MainWindow";
             InitializeComponent();
-            Left = System.Windows.SystemParameters.WorkArea.Width - Width;
-            Height = System.Windows.SystemParameters.WorkArea.Height;
-            Topmost = true;
 
+            Topmost = true;
+            Visibility = Visibility.Hidden;
+            ChanceSize(Config.config.Size);
 
             // System.Threading.Thread thread = (tcpClient is object) ? new System.Threading.Thread(GetFromServer): new System.Threading.Thread(CheakDirecJson); 
             System.Threading.Thread thread = new System.Threading.Thread(lodingConnection);
@@ -52,43 +55,109 @@ namespace PikodAorfLayout
             //  var a = Choise.choiselist;
 
         }
+        private void ChanceSize(string size)
+        {
+            double scale =1;
+            switch (size)
+            {
+                case "big":
+                    scale = 1;
+                    break;
+                case "mid":
+                    scale = 0.75;
+                    break;
+                case "small":
+                    scale = 0.60;
+                    break;
+            }
+
+            image.Height = 121* scale;
+            Width = 500* scale;
+            massgesize = 55 * scale;
+            massgefont = (int)(36 * scale);
+            Left = System.Windows.SystemParameters.WorkArea.Width - Width;
+            Height = System.Windows.SystemParameters.WorkArea.Height;
+        }
         private async void lodingConnection()
         {
             while (App.isAppOpen)
             {
-                if (App.tcpClient is Object && App.tcpClient.Connected) GetFromServer();
-                else CheakDirecJson();
+                if (App.tcpClient is Object && App.tcpClient.Connected) await GetFromServer();
+                else await CheakDirecJson();
             }
+        }
+
+        public async void LoadExmple()
+        {
+            if (Visibility == Visibility.Visible) Visibility= Visibility.Hidden;
+
+            ChanceSize(Config.config.Size);
+            List<Alert> exmplelist = new List<Alert>();
+            for (int i = 0; i < 20; i++)
+            {
+                Alert exmple = new Alert() { data = "דוגמא" };
+                exmplelist.Add(exmple);
+            }
+             await popdetails(exmplelist);
+            Visibility = Visibility.Visible;
+            await Task.Delay(3000).ContinueWith(async _ =>
+            {
+                await this.Dispatcher.Invoke(async () =>
+                {
+                    Visibility = Visibility.Hidden;
+                    await popdetails(exmplelist);
+                });
+
+            }
+            );
         }
 
 
         //######################################## show with server connection####################################### 
         private async Task popdetails(List<Alert> showlist)
         {
+            var show = new ObservableCollection<massge>();
+            foreach (var item in showlist)
+            {
+                show.Add(new massge(item.data, massgesize, massgefont));
+            }
             await this.Dispatcher.Invoke(async () =>
             {
-                massege.DataContext = new ObservableCollection<Alert>(showlist);
+                massege.DataContext = show;
             });
         }
-        private async void GetFromServer()
+        private async Task GetFromServer()
         {
-            await this.Dispatcher.Invoke(async () =>
-            {
-                Visibility = Visibility.Hidden;
-            });
+            //if (emptylist.Count == 0)
+            //{
+            //    await this.Dispatcher.Invoke(async () =>
+            //    {
+            //        Visibility = Visibility.Hidden;
+            //    });
+            //}
             try
             {
 
                 string response = RecvieAlert();
+                if (response == "") 
+                {
+                    hestory = null;
+                    await this.Dispatcher.Invoke(async () =>
+                    {
+                        Visibility = Visibility.Hidden;
+                        popdetails(emptylist);
+                    });
+                    return;
+                }
                 List<Alert> alertlist = Filter(JsonSerializer.Deserialize<Alert[]>(response));
-
-                if (alertlist.Count > 0)
+                hestory = alertlist;
+                if (hestory.Count > 0)
                 {
                     await this.Dispatcher.Invoke(async () =>
                     {
                         Visibility = Visibility.Visible;
                     });
-                    await popdetails(alertlist);
+                    await popdetails(hestory);
                 }
                 else
                 {
@@ -99,6 +168,10 @@ namespace PikodAorfLayout
                     popdetails(emptylist);
 
                 }
+            }
+            catch (System.Text.Json.JsonException ex)
+            {
+
             }
             catch (Exception ex)
             {
@@ -117,11 +190,23 @@ namespace PikodAorfLayout
                 byte[] buffer = new byte[1024];
                 int bytesRead;
 
-                do
+
+                try
                 {
-                    bytesRead = App.tcpClient.GetStream().Read(buffer, 0, buffer.Length);
-                    memoryStream.Write(buffer, 0, bytesRead);
-                } while (bytesRead == buffer.Length);
+                    // Set a timeout of, for example, 5000 milliseconds (5 seconds)
+                    App.tcpClient.GetStream().ReadTimeout = 5000;
+
+                    do
+                    {
+                        bytesRead = App.tcpClient.GetStream().Read(buffer, 0, buffer.Length);
+                        memoryStream.Write(buffer, 0, bytesRead);
+                    } while (bytesRead == buffer.Length);
+                }
+                catch (IOException ex)
+                {
+                    // Handle the timeout exception here
+                    return "";
+                }
 
                 string response = Encoding.UTF8.GetString(memoryStream.ToArray());
                 return response;
@@ -153,7 +238,7 @@ namespace PikodAorfLayout
         }
         //######################################################### Conect direct to json ##################################################################
 
-        private async void CheakDirecJson()
+        private async Task CheakDirecJson()
         {
             bool isRun = true;
             startTime = DateTime.Now;
@@ -195,7 +280,11 @@ namespace PikodAorfLayout
                 {
                     if (i > 0) data = await LoadJsonAsync();
                     releventData = FilterWithTimer(data);
-                    if (releventData.Count() == 0) break;
+                    if (releventData.Count() == 0)
+                    {
+                        i = loop;
+                        break;
+                    }
                     releventData.Sort();
                     await this.Dispatcher.Invoke(async () =>
                     {

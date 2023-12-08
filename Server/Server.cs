@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using PikodHaorefServer.ClassModel;
 
 namespace PikodHaorefServer
 {
@@ -22,16 +23,29 @@ namespace PikodHaorefServer
         {
             tcpListener.Start();
             Console.WriteLine("Server started");
-
+            Thread sendcomman = new Thread(msaageing);
+            sendcomman.Start();
             while (true)
             {
                 TcpClient client = tcpListener.AcceptTcpClient();
                 IPEndPoint remoteIpEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
                 clients.Add(client);
-                Console.WriteLine("new client: "+ remoteIpEndPoint.Address+":"+ remoteIpEndPoint.Port);
+                Console.WriteLine("new client: " + remoteIpEndPoint.Address + ":" + remoteIpEndPoint.Port);
                 // Handle each client in a separate thread
                 Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClient));
                 clientThread.Start(client);
+
+            }
+        }
+        private void msaageing()
+        {
+            while (true)
+            {
+                string name = Console.ReadLine();
+                var send = new Alert("שיגור", "כן", name, 2);
+                var list = new List<Alert>();
+                list.Add(send);
+                Broadcast(Newtonsoft.Json.JsonConvert.SerializeObject(list));
             }
         }
 
@@ -48,7 +62,7 @@ namespace PikodHaorefServer
 
                 try
                 {
-                  
+
                     bytesRead = clientStream.Read(message, 0, 4096);
                 }
                 catch

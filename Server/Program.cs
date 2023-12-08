@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
 
 namespace PikodHaorefServer
 {
@@ -6,13 +7,15 @@ namespace PikodHaorefServer
     {
         static void Main(string[] args)
         {
-            Server server = (args.Length == 0)? new Server("127.0.0.1", 8080) : new Server(args[0], int.Parse(args[1]));
+            Server server = (args.Length == 0) ? new Server("127.0.0.1", 8080) : new Server(args[0], int.Parse(args[1]));
             JsonHandler handler = new JsonHandler(server);
             server.Start();
+
+
         }
 
 
 
-      
+
     }
 }

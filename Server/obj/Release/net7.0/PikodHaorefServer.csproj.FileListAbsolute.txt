@@ -32,3 +32,4 @@ D:\עבודה\PikodHaOrefDeskTop\Server\obj\Release\net7.0\refint\PikodHaorefSer
 D:\עבודה\PikodHaOrefDeskTop\Server\obj\Release\net7.0\PikodHaorefServer.pdb
 D:\עבודה\PikodHaOrefDeskTop\Server\obj\Release\net7.0\PikodHaorefServer.genruntimeconfig.cache
 D:\עבודה\PikodHaOrefDeskTop\Server\obj\Release\net7.0\ref\PikodHaorefServer.dll
+D:\project\PikodHaOrefDeskTop\Server\bin\Release\net7.0\districts.json

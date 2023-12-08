@@ -17,9 +17,11 @@ namespace PikodAorfLayout.Class
         public Config(Config other)
         {
             this.ChoiseAlarm = other.ChoiseAlarm;
+            this.Size = other.Size;
             this.choise = new Choise(other.choise);
         }
         public string ChoiseAlarm { get; set; }
         public Choise choise { get; set; }
+        public string Size { get; set; }
     }
 }

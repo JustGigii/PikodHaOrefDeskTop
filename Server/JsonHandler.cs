@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PikodHaorefServer.ClassModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,26 @@ namespace PikodHaorefServer
         bool _isClose;
         Thread thread;
         Server _server;
+        Dictionary<string, int> cityTime;
         public JsonHandler(Server server)
         {
             _isClose = false;
+            LoadDictionary();
             thread = new Thread(cheakjson);
             thread.Start();
             _server = server;
+
+        }
+        private void LoadDictionary()
+        {
+            cityTime = new Dictionary<string, int>();
+            var jsonData = System.IO.File.ReadAllText("districts.json");
+            var cities = JsonConvert.DeserializeObject<List<cityLabel>>(jsonData);
+            foreach (var item in cities)
+            {
+                if(!cityTime.ContainsKey(item.label))
+                cityTime.Add(item.label, item.migun_time);
+            }
 
         }
         private async void cheakjson()
@@ -67,10 +82,11 @@ namespace PikodHaorefServer
             if (data == null) return releventData;
             foreach (var alert in data)
             {
-                  //if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(25))
-               if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromMinutes(1))
+                int time = (cityTime.ContainsKey(alert.data)) ? cityTime[alert.data]:45;
+                 // if (DateTime.Now - DateTime.Parse(alert.alertDate) < TimeSpan.FromHours(25))
+                if (DateTime.Now - DateTime.Parse(alert.alertDate) <= TimeSpan.FromSeconds(time))
                 {
-                    Console.WriteLine(DateTime.Now);
+                    //Console.WriteLine(DateTime.Now);
                     releventData.Add(alert);
                 }
             }

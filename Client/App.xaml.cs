@@ -50,7 +50,7 @@ namespace PikodAorfLayout
             {         
             if (!Directory.Exists(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref")))
                 Directory.CreateDirectory(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "PikodHaoref"));
-            string newtext = "{\"ChoiseAlarm\":\"allcheak\",\"choise\":{}}";
+            string newtext = "{\"ChoiseAlarm\":\"allcheak\",\"choise\":{},\"Size\": \"big\"}";
                 System.IO.File.WriteAllText(JsonPath, newtext);
                 isfirst=true;
             }
@@ -151,8 +151,8 @@ namespace PikodAorfLayout
         }
         private void connection()
         {
-             //var serverIp = "129.159.128.159";
-             var serverIp = "127.0.0.1";
+             var serverIp = "129.159.128.159";
+             //var serverIp = "127.0.0.1";
              var serverPort = 8080;
             try
             {

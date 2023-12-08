@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PikodAorfLayout" xmlns:control="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
         mc:Ignorable="d"
-        Height="600" Width="920"  WindowStyle="None" Background="Transparent" ResizeMode="NoResize" ShowInTaskbar="True" Visibility="Visible" MouseDown="Window_MouseDown" AllowsTransparency="True">
+        Height="700" Width="925"  WindowStyle="None" Background="Transparent" ResizeMode="NoResize" ShowInTaskbar="True" Visibility="Visible" MouseDown="Window_MouseDown" AllowsTransparency="True">
     <Window.Resources >
         <ResourceDictionary Source="scroll.xaml">
 
@@ -55,10 +55,10 @@
             <Viewbox Grid.Row="1"  Grid.Column="1" Margin="518,84,20,411" Height="40">
                 <RadioButton  x:Name="DistrictsCheck"  GroupName="ChoiseAlarm" Grid.Column="1"  Content="הצג לפי אזורים" FlowDirection="RightToLeft"  Foreground="White" Checked="RadioButton_Checked"/>
             </Viewbox>
-            <Viewbox Grid.Row="1"  Grid.Column="1" Margin="0,347,20,150" HorizontalAlignment="Right">
-                <RadioButton  x:Name="cityCheck"  GroupName="ChoiseAlarm" Grid.Column="1"  Content="הצג ערים" FlowDirection="RightToLeft"  Foreground="White" Checked="RadioButton_Checked"/>
+            <Viewbox Grid.Row="1"  Grid.Column="1" Margin="0,347,20,159" HorizontalAlignment="Right" Width="317">
+                <RadioButton  x:Name="cityCheck"  GroupName="ChoiseAlarm" Grid.Column="1"  Content="הצג ערים" FlowDirection="RightToLeft"  Foreground="White" Checked="RadioButton_Checked" Height="62" Width="123"/>
             </Viewbox>
-            <Border  Grid.Row="1"  Grid.Column="1" CornerRadius="10" BorderBrush="#FFE88813" BorderThickness="4,4,4,4" Background="#FFFFAB45" Margin="223,99,249,212" >
+            <Border  Grid.Row="1"  Grid.Column="1" CornerRadius="10" BorderBrush="#FFE88813" BorderThickness="4,4,4,4" Background="#FFFFAB45" Margin="216,134,275,303" >
                 <ScrollViewer x:Name="DistrictsPanel"  Margin="0,6,1,0" Height="200" VerticalAlignment="Top" FlowDirection="RightToLeft">
                     <StackPanel Width="229">
                         <ItemsControl x:Name="districtscontrolchoose" Margin="0 0 0 0" ItemsSource="{Binding}" Width="237">
@@ -93,7 +93,7 @@
                 </ScrollViewer>
 
             </Border>
-            <Button  BorderThickness="2" Grid.Column="1" Content="שמירה" HorizontalAlignment="Left" Margin="36,464,0,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFFFAB45" Height="37" Width="75" Foreground="White" BorderBrush="#FFE88813" Click="Button_Click"/>
+            <Button  BorderThickness="2" Grid.Column="1" Content="שמירה" HorizontalAlignment="Left" Margin="29,553,0,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFFFAB45" Height="37" Width="75" Foreground="White" BorderBrush="#FFE88813" Click="Button_Click"/>
             <StackPanel Orientation="Vertical"    
                     VerticalAlignment="Top"    
                     HorizontalAlignment="Left"
@@ -143,6 +143,10 @@
                 </Popup>
             </StackPanel>
             <Button x:Name="clearbox"  BorderThickness="2" Grid.Column="1" Content="איפוס" HorizontalAlignment="Left" Margin="88,387,0,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFFFAB45" Height="38" Width="75" Foreground="White" BorderBrush="#FFE88813" Click="Button_Click_clear" />
+            <Label x:Name="label" Grid.Column="1" Content="גודל מסך" HorizontalAlignment="Left" Margin="575,471,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" FontFamily="Hobo Std" FontSize="24"/>
+            <Button x:Name="big" BorderThickness="2" Grid.Column="1" Content="גודל" HorizontalAlignment="Left" Margin="402,471,0,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFFFAB45" Height="37" Width="75" Foreground="White" BorderBrush="#FFE88813"  FontSize="16" Click="Button_Size_Click"/>
+            <Button x:Name="mid" BorderThickness="2" Grid.Column="1" Content="בינוני" HorizontalAlignment="Left" Margin="296,471,0,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFFFAB45" Height="37" Width="74" Foreground="White" BorderBrush="#FFE88813" Click="Button_Size_Click" FontSize="16"/>
+            <Button x:Name="small"  BorderThickness="2" Grid.Column="1" Content="קטן" HorizontalAlignment="Left" Margin="188,471,0,0" Grid.Row="1" VerticalAlignment="Top" Background="#FFFFAB45" Height="37" Width="74" Foreground="White" BorderBrush="#FFE88813" Click="Button_Size_Click" FontSize="16"/>
 
         </Grid>
 

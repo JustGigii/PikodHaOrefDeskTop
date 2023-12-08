@@ -46,3 +46,4 @@ D:\עבודה\PikodHaOrefDeskTop\Server\obj\Debug\net7.0\refint\PikodHaorefServe
 D:\עבודה\PikodHaOrefDeskTop\Server\obj\Debug\net7.0\PikodHaorefServer.pdb
 D:\עבודה\PikodHaOrefDeskTop\Server\obj\Debug\net7.0\PikodHaorefServer.genruntimeconfig.cache
 D:\עבודה\PikodHaOrefDeskTop\Server\obj\Debug\net7.0\ref\PikodHaorefServer.dll
+D:\project\PikodHaOrefDeskTop\Server\bin\Debug\net7.0\districts.json
